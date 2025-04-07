@@ -27,7 +27,7 @@ class ArticleForm(forms.ModelForm):
         image = self.cleaned_data.get('image')
 
         # Allow existing image to remain if no new image is uploaded
-        if not image:  
+        if not image:   
             return image  
 
         # Check file size
