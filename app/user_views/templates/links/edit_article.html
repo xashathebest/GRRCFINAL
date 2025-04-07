@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Article - GRRC</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .sidebar {
+            transition: all 0.3s ease;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 50;
+        }
+        .sidebar.collapsed {
+            width: 7rem;
+        }
+        .sidebar.collapsed .nav-text {
+            display: none;
+        }
+        .main-content {
+            transition: all 0.3s ease;
+            margin-left: 16rem;
+            min-height: 100vh;
+        }
+        .main-content.expanded {
+            margin-left: 5rem;
+        }
+        .form-group {
+            transition: all 0.3s ease;
+        }
+        .form-group:focus-within {
+            transform: translateY(-2px);
+        }
+        .preview-image {
+            transition: all 0.3s ease;
+        }
+        .preview-image:hover {
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: white;
+        }
+        .toggle-btn {
+            transition: all 0.3s ease;
+        }
+        .toggle-btn:hover {
+            transform: scale(1.1);
+        }
+        .form-input:focus {
+            box-shadow: 0 0 0 2px rgba(165, 28, 48, 0.2);
+        }
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    {% if user_role == 'admin' or user_role == 'member' %}
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="sidebar bg-red-700 text-white w-64">
+            <div class="p-4">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-md  font-bold">GRRC ADMIN</h1>
+                    <button id="toggleSidebar" class="toggle-btn text-white hover:text-gray-200 p-2 rounded-lg">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="flex-1 mt-8">
+                <a href="{% url 'home' %}" class="nav-link flex items-center px-6 py-3 text-white">
+                    <i class="fas fa-home w-6"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="{% url 'article_list' %}" class="nav-link flex items-center px-6 py-3 text-white">
+                    <i class="fas fa-newspaper w-6"></i>
+                    <span class="nav-text">Articles</span>
+                </a>
+                <a href="{% url 'pending_articles' %}" class="nav-link flex items-center px-6 py-3 text-white">
+                    <i class="fas fa-clock w-6"></i>
+                    <span class="nav-text">Pending Articles</span>
+                </a>
+                {% if user_role == 'admin' %}
+                <a href="{% url 'account_list' %}" class="nav-link flex items-center px-6 py-3 text-white">
+                    <i class="fas fa-users w-6 "></i>
+                    <span class="nav-text">User Management</span>
+                </a>
+                {% endif %}
+            </nav>
+            <!-- Logout at bottom -->
+            <div class="p-4 border-t border-red-800">
+                <a href="{% url 'logout' %}" class="nav-link flex items-center px-6 py-3 text-white">
+                    <i class="fas fa-sign-out-alt w-6"></i>
+                    <span class="nav-text">Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content flex-1 overflow-auto">
+            <div class="p-8">
+                <div class="max-w-4xl mx-auto animate-fade-in">
+                    <!-- Header -->
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-800">Edit Article</h1>
+                        <p class="text-gray-600">Update article details</p>
+                    </div>
+
+                    <!-- Form -->
+                    <form method="post" enctype="multipart/form-data" class="bg-white rounded-lg shadow-md p-6">
+                        {% csrf_token %}
+                        
+                        <!-- Title -->
+                        <div class="form-group mb-6">
+                            <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Article Title
+                            </label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ form.title.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Content -->
+                        <div class="form-group mb-6">
+                            <label for="{{ form.content.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Article Content
+                            </label>
+                            {{ form.content }}
+                            {% if form.content.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ form.content.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Current Image -->
+                        {% if article.image %}
+                        <div class="form-group mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Current Image
+                            </label>
+                            <div class="relative w-full h-48 rounded-lg overflow-hidden">
+                                <img src="{{ article.image.url }}" alt="Current Image" class="preview-image w-full h-full object-cover">
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Image Upload -->
+                        <div class="form-group mb-6">
+                            <label for="{{ form.image.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Article Image
+                            </label>
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
+                                <div class="space-y-1 text-center">
+                                    <div id="imagePreview" class="mb-4">
+                                        <img id="preview" src="{{ article.image.url }}" alt="Preview" class="mx-auto h-32 w-auto rounded-lg">
+                                    </div>
+                                    <div id="uploadIcon" class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-gray-100">
+                                        <i class="fas fa-camera text-gray-400 text-xl"></i>
+                                    </div>
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="{{ form.image.id_for_label }}" class="relative cursor-pointer bg-white rounded-md font-medium text-[#A51C30] hover:text-red-800 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-red-500">
+                                            <span>Upload a file</span>
+                                            {{ form.image }}
+                                        </label>
+                                        <p class="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500">
+                                        PNG, JPG, GIF up to 10MB
+                                    </p>
+                                </div>
+                            </div>
+                            {% if form.image.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ form.image.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex justify-end space-x-4">
+                            <a href="{% url 'article_list' %}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn-primary px-6 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800">
+                                <i class="fas fa-save mr-2"></i>Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar Toggle
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+        const toggleButton = document.getElementById('toggleSidebar');
+        const toggleIcon = toggleButton.querySelector('i');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+            toggleIcon.classList.toggle('fa-bars');
+            toggleIcon.classList.toggle('fa-times');
+        });
+
+        // Image Preview
+        const imageInput = document.querySelector('input[type="file"]');
+        const imagePreview = document.getElementById('imagePreview');
+        const preview = document.getElementById('preview');
+        const removeImage = document.getElementById('removeImage');
+
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        removeImage.addEventListener('click', function() {
+            imageInput.value = '';
+            preview.src = '';
+            imagePreview.classList.add('hidden');
+        });
+
+        // Add active state to current page link
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+    {% else %}
+    <div class="min-h-screen flex items-center justify-center bg-gray-100">
+        <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+            <div class="text-center">
+                <i class="fas fa-exclamation-circle text-6xl text-red-500 mb-4"></i>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">Access Denied</h1>
+                <p class="text-gray-600 mb-6">You do not have permission to view this page.</p>
+                <a href="{% url 'login' %}" class="inline-block bg-[#A51C30] text-white px-6 py-2 rounded-lg hover:bg-red-800 transition-colors">
+                    Return to Login
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>

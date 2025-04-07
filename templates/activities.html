@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities - Gender Research and Resource Center</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-white">
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{% static 'links/svgs/GRRC Logo.png' %}" alt="GRRC Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'activities' %}" class="active">Activities</a></li>
+                <li><a href="{% url 'research' %}">Research</a></li>
+                <li><a href="{% url 'uga' %}">UGA</a></li>
+                <li><a href="{% url 'gender_clubs' %}">Gender Clubs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section with Image -->
+        <section class="hero relative h-[500px] overflow-hidden">
+            <img src="{% static 'links/grrc_img/activities-hero.jpg' %}" alt="Activities Hero" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Our Activities</h1>
+                    <p class="text-xl text-white max-w-2xl">Empowering change through meaningful initiatives and community engagement</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Activity -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="p-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center space-x-4">
+                                    <img src="{% static 'links/grrc_img/author-avatar.jpg' %}" alt="Author" class="w-12 h-12 rounded-full">
+                                    <div>
+                                        <h3 class="font-semibold">Shahrukh Biao</h3>
+                                        <p class="text-gray-600">GRRC Coordinator</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-gray-600">March 15, 2024</p>
+                                    <p class="text-gray-600">2:00 PM - 5:00 PM</p>
+                                </div>
+                            </div>
+                            <h2 class="text-3xl font-bold mb-4">Gender Equality Workshop Series</h2>
+                            <div class="prose max-w-none mb-6">
+                                <p class="text-gray-700 mb-4">
+                                    Join us for an engaging workshop series focused on promoting gender equality and creating inclusive environments. This comprehensive program brings together experts, community leaders, and participants to discuss and implement strategies for positive change.
+                                </p>
+                                <h3 class="text-xl font-semibold mb-2">Highlights:</h3>
+                                <ul class="list-disc pl-6 text-gray-700">
+                                    <li>Interactive sessions on gender sensitivity</li>
+                                    <li>Case studies and real-world applications</li>
+                                    <li>Networking opportunities with industry leaders</li>
+                                    <li>Practical tools for implementing change</li>
+                                </ul>
+                            </div>
+                            <a href="#" class="inline-block bg-[#A51C30] text-white px-6 py-3 rounded-lg hover:bg-[#8b1728] transition-colors">
+                                Register Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activities List -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Upcoming Activities</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Activity Card 1 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src="{% static 'links/grrc_img/activity1.jpg' %}" alt="Activity 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Women in Leadership Forum</h3>
+                            <p class="text-gray-600 mb-4">Join us for an inspiring discussion on women's leadership in academia and beyond.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-500">March 20, 2024</span>
+                                <a href="#" class="text-[#A51C30] hover:text-[#8b1728]">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Card 2 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src="{% static 'links/grrc_img/activity2.jpg' %}" alt="Activity 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Youth Empowerment Workshop</h3>
+                            <p class="text-gray-600 mb-4">Empowering young leaders to promote gender equality in their communities.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-500">March 25, 2024</span>
+                                <a href="#" class="text-[#A51C30] hover:text-[#8b1728]">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Card 3 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <img src="{% static 'links/grrc_img/activity3.jpg' %}" alt="Activity 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Gender Research Symposium</h3>
+                            <p class="text-gray-600 mb-4">Presenting cutting-edge research on gender studies and equality.</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-500">April 5, 2024</span>
+                                <a href="#" class="text-[#A51C30] hover:text-[#8b1728]">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-12">
+                    <nav class="flex items-center space-x-2">
+                        <a href="#" class="px-4 py-2 border rounded-lg hover:bg-gray-100">Previous</a>
+                        <a href="#" class="px-4 py-2 bg-[#A51C30] text-white rounded-lg">1</a>
+                        <a href="#" class="px-4 py-2 border rounded-lg hover:bg-gray-100">2</a>
+                        <a href="#" class="px-4 py-2 border rounded-lg hover:bg-gray-100">3</a>
+                        <a href="#" class="px-4 py-2 border rounded-lg hover:bg-gray-100">Next</a>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: grrc@example.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Gender Research and Resource Center. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

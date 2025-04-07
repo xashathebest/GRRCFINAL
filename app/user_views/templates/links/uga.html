@@ -1,0 +1,407 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGA - Gender Research and Resource Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'slide-in': 'slideIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .container {
+            @apply w-4/5 mx-auto p-5;
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <header class="fixed mt-5 top-0 left-1/2 -translate-x-1/2 z-30 w-11/12 lg:w-9/12 p-4 rounded-3xl lg:bg-gradient-to-r lg:from-[#E182CA]/80 lg:to-[#B772FE]/80 lg:border-2 lg:border-violet-500 transition-transform duration-300" id="navbar">
+        <div class="mx-auto">
+            <div class="flex justify-between items-center w-full">
+                <!-- Logo Section -->
+                <div class="flex items-center space-x-4">
+                    <img src="/static/links/grrc_img/wmsu.png" alt="WMSU Logo" class="w-12 h-12">
+                    <img src="/static/links/grrc_img/GRRC Logo.png" alt="GRRC Logo" class="w-12 h-12">
+                </div>
+
+                <!-- Desktop Navigation - Centered -->
+                <div class="hidden lg:flex items-center justify-center gap-8 flex-1">
+                    <a href="{% url 'index' %}" class="text-white text-sm hover:text-violet-200 transition-colors">Home</a>
+                    <a href="{% url 'activities' %}" class="text-white text-sm hover:text-violet-200 transition-colors">Activities</a>
+                    <a href="{% url 'about_us' %}" class="text-white text-sm hover:text-violet-200 transition-colors">About Us</a>
+                    <a href="{% url 'uga' %}" class="text-white text-sm hover:text-violet-200 transition-colors">UGA</a>
+                    <a href="{% url 'research' %}" class="text-white text-sm hover:text-violet-200 transition-colors">Research</a>
+
+                    <!-- Gender Clubs Dropdown -->
+                    <div class="relative group">
+                        <button class="text-white text-sm hover:text-violet-200 transition-colors flex items-center gap-1">
+                            Gender Clubs
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 w-72 bg-orange-500 rounded-lg shadow-lg py-2 hidden group-hover:block hover:block transform -translate-x-1/4">
+                            <a href="https://www.facebook.com/search/top?q=ccs-gender%20club" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Computing Studies</a>
+                            <a href="https://www.facebook.com/profile.php?id=100093717316260" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Engineering</a>
+                            <a href="https://www.facebook.com/profile.php?id=100087148836205" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Nursing</a>
+                            <a href="https://www.facebook.com/CTEGenderClub" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Teacher Education</a>
+                            <a href="https://www.facebook.com/WMSUCLAGenderClub" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Liberal Arts</a>
+                            <a href="https://www.facebook.com/WMSUCSMGenderClub" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Science and Mathematics</a>
+                            <a href="https://www.facebook.com/profile.php?id=100094464625499" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Sport Science and Physical Education</a>
+                            <a href="https://www.facebook.com/WMSUCCJEGENDERSCLUB" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Criminal Justice Education</a>
+                            <a href="https://www.facebook.com/profile.php?id=61553350412685" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Public Administration</a>
+                            <a href="https://www.facebook.com/wmsucarchgenderclub" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Public Architecture</a>
+                            <a href="https://www.facebook.com/profile.php?id=100080166283438" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Home Economics</a>
+                            <a href="https://www.facebook.com/profile.php?id=61560413797983" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Asian and Islamic Studies</a>
+                            <a href="https://www.facebook.com/profile.php?id=100086428662391" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Forestry and Environmental Studies</a>
+                            <a href="https://www.facebook.com/profile.php?id=100086894635444" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of External Studies Diplahan</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Join Us Button -->
+                <a href="{% url 'login' %}">
+                    <button class="hidden lg:block bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors">
+                        Login
+                    </button>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="lg:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Side Navigation -->
+    <nav id="menu" class="fixed top-0 right-0 h-screen w-64 md:w-80 bg-violet-500 text-white transform translate-x-full transition-transform duration-300 ease-in-out z-20 pt-20">
+        <div class="flex flex-col gap-6 p-6">
+            <a href="{% url 'index' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">Home</a>
+            <a href="{% url 'activities' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">Activities</a>
+            <a href="{% url 'about_us' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">About Us</a>
+            <a href="{% url 'uga' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">UGA</a>
+            <a href="{% url 'research' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">Research</a>
+            <a href="{% url 'gender_clubs' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">Gender Clubs</a>
+            <a href="{% url 'login' %}">
+                <button class="bg-orange-500 px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors w-full">
+                    Login
+                </button>
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="relative h-[500px] overflow-hidden animate-fade-in">
+            <img src="/static/links/svgs/womensmonth.jpg" alt="UGA Hero" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 animate-slide-up">University Gender Association</h1>
+                    <p class="text-xl text-white max-w-2xl animate-slide-up" style="animation-delay: 0.2s">Advancing gender equality and inclusivity across Western Mindanao State University</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- UGA Overview Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-6 animate-on-scroll">Our Commitment to Gender Equality</h2>
+                    <p class="text-gray-600 mb-8 animate-on-scroll" style="animation-delay: 0.2s">The University Gender Association (UGA) is our comprehensive framework for promoting gender equality, preventing gender-based violence, and fostering an inclusive environment for all members of the WMSU community.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-6 bg-gray-50 rounded-lg hover-lift animate-on-scroll" style="animation-delay: 0.4s">
+                            <div class="w-12 h-12 bg-[#A51C30] rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-balance-scale text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Equality</h3>
+                            <p class="text-gray-600">Promoting equal opportunities and treatment for all genders</p>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg hover-lift animate-on-scroll" style="animation-delay: 0.6s">
+                            <div class="w-12 h-12 bg-[#A51C30] rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-shield-alt text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Protection</h3>
+                            <p class="text-gray-600">Ensuring safety and security for all community members</p>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg hover-lift animate-on-scroll" style="animation-delay: 0.8s">
+                            <div class="w-12 h-12 bg-[#A51C30] rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-users text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Inclusivity</h3>
+                            <p class="text-gray-600">Creating an environment that values diversity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Areas Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 animate-on-scroll">Key Areas of Focus</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Policy Development -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift animate-on-scroll" style="animation-delay: 0.2s">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-[#A51C30] rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-file-alt text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Policy Development</h3>
+                            <p class="text-gray-600 mb-4">Creating and implementing gender-sensitive policies across the university.</p>
+                            <a href="#" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1 transition-colors duration-300">
+                                Learn More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Training & Education -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift animate-on-scroll" style="animation-delay: 0.4s">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-[#A51C30] rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-chalkboard-teacher text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Training & Education</h3>
+                            <p class="text-gray-600 mb-4">Providing gender sensitivity training and educational programs.</p>
+                            <a href="#" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1 transition-colors duration-300">
+                                Learn More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Support Services -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift animate-on-scroll" style="animation-delay: 0.6s">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-[#A51C30] rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-hands-helping text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Support Services</h3>
+                            <p class="text-gray-600 mb-4">Offering counseling and support for gender-related concerns.</p>
+                            <a href="#" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1 transition-colors duration-300">
+                                Learn More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-12 animate-on-scroll">Implementation Strategy</h2>
+                    <div class="space-y-8">
+                        <div class="flex items-start gap-4 animate-on-scroll" style="animation-delay: 0.2s">
+                            <div class="w-8 h-8 bg-[#A51C30] rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white font-bold">1</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Assessment & Planning</h3>
+                                <p class="text-gray-600">Conducting comprehensive gender audits and developing action plans.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 animate-on-scroll" style="animation-delay: 0.4s">
+                            <div class="w-8 h-8 bg-[#A51C30] rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white font-bold">2</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Capacity Building</h3>
+                                <p class="text-gray-600">Training staff and faculty on gender sensitivity and equality.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 animate-on-scroll" style="animation-delay: 0.6s">
+                            <div class="w-8 h-8 bg-[#A51C30] rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white font-bold">3</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Monitoring & Evaluation</h3>
+                                <p class="text-gray-600">Regular assessment of progress and impact of gender initiatives.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-6 animate-on-scroll">Join Us in Promoting Gender Equality</h2>
+                    <p class="text-gray-600 mb-8 animate-on-scroll" style="animation-delay: 0.2s">Be part of our mission to create a more inclusive and equitable university environment.</p>
+                    <div class="flex flex-wrap justify-center gap-4 animate-on-scroll" style="animation-delay: 0.4s">
+                        <a href="#" class="px-6 py-3 bg-[#A51C30] text-white rounded-lg hover:bg-[#8b1728] transition-all duration-300 hover:shadow-lg">
+                            Get Involved
+                        </a>
+                        <a href="#" class="px-6 py-3 border-2 border-[#A51C30] text-[#A51C30] rounded-lg hover:bg-[#A51C30] hover:text-white transition-all duration-300 hover:shadow-lg">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-l from-[#E182CA]/80 to-[#B772FE]/80 text-white gap-20 text-right p-4">
+        <div class="flex items-center justify-end gap-2">
+            <div class="bg-white p-1 rounded">
+                <img src="/static/links/icons/EmailIcon.png" alt="EmailIcon" class="w-6 h-6">
+            </div>
+            <p class="text-sm font-bold">Gender Desk Helpline</p>
+        </div>
+        <p class="text-sm italic">grrc@wmsu.edu.ph</p>
+    </footer>
+    <footer class="bg-violet-500 text-white relative z-10 mt-auto pb-10">
+        <div class="container mx-auto px-6 py-12 relative">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <div class="flex flex-col space-y-2">
+                        <p class="flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            grrc@wmsu.edu.ph
+                        </p>
+                        <p class="flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                            (+63) 123-4567
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="{% url 'about_us'%}" class="hover:text-violet-200 transition-colors">About Us</a></li>
+                        <li><a href="{% url 'activities'%}" class="hover:text-violet-200 transition-colors">Activities</a></li>
+                        <li><a href="{% url 'research'%}" class="hover:text-violet-200 transition-colors">Research</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-violet-200 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="hover:text-violet-200 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- GRRC Logo -->
+                <div class="flex items-center justify-center md:justify-end">
+                    <img src="/static/links/grrc_img/GRRC Logo.png" alt="GRRC Logo" class="w-24 h-24">
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-violet-400 mt-8 pt-8 text-center">
+                <p>&copy; 2024 Gender Research and Resource Center. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+
+        menuBtn.addEventListener('click', () => {
+            menu.classList.toggle('translate-x-full');
+        });
+
+        // Smooth scroll animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

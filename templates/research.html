@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - Gender Research and Resource Center</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{% static 'links/svgs/GRRC Logo.png' %}" alt="GRRC Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'activities' %}">Activities</a></li>
+                <li><a href="{% url 'research' %}" class="active">Research</a></li>
+                <li><a href="{% url 'uga' %}">UGA</a></li>
+                <li><a href="{% url 'gender_clubs' %}">Gender Clubs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Research</h1>
+                    <p>Advancing knowledge through rigorous gender research</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="card">
+                    <h2>Research Areas</h2>
+                    <div class="grid">
+                        <div class="card">
+                            <h3>Gender Equality</h3>
+                            <p>Investigating barriers to gender equality and developing solutions for a more equitable society.</p>
+                            <a href="#" class="btn">View Publications</a>
+                        </div>
+                        <div class="card">
+                            <h3>Women's Empowerment</h3>
+                            <p>Studying factors that contribute to women's economic, social, and political empowerment.</p>
+                            <a href="#" class="btn">View Publications</a>
+                        </div>
+                        <div class="card">
+                            <h3>Gender in Education</h3>
+                            <p>Examining gender disparities in education and developing strategies for improvement.</p>
+                            <a href="#" class="btn">View Publications</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Featured Research</h2>
+                <div class="grid">
+                    <div class="card">
+                        <img src="{% static 'links/icons/EmailIcon.png' %}" alt="Research Publication" class="img-fluid">
+                        <h3>Gender Wage Gap Analysis</h3>
+                        <p>A comprehensive study of the gender wage gap in various sectors and its impact on economic growth.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                    <div class="card">
+                        <img src="{% static 'links/icons/EmailIcon.png' %}" alt="Research Publication" class="img-fluid">
+                        <h3>Women in Leadership</h3>
+                        <p>Examining the challenges and opportunities for women in leadership positions across industries.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Research Publications</h2>
+                <div class="card">
+                    <ul class="list-unstyled">
+                        <li>
+                            <h3>Annual Gender Equality Report 2023</h3>
+                            <p>A comprehensive analysis of gender equality progress across different sectors.</p>
+                            <a href="#" class="btn">Download PDF</a>
+                        </li>
+                        <li>
+                            <h3>Gender in Education: A Global Perspective</h3>
+                            <p>Comparative study of gender disparities in education systems worldwide.</p>
+                            <a href="#" class="btn">Download PDF</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Research Opportunities</h2>
+                <div class="card">
+                    <p>We welcome collaboration with researchers and institutions interested in gender studies. Join our research network to:</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check"></i> Access research resources and databases</li>
+                        <li><i class="fas fa-check"></i> Participate in ongoing research projects</li>
+                        <li><i class="fas fa-check"></i> Collaborate with international researchers</li>
+                        <li><i class="fas fa-check"></i> Publish in our research journal</li>
+                    </ul>
+                    <a href="#" class="btn">Get Involved</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: grrc@example.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Gender Research and Resource Center. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

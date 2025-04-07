@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Gender Research and Resource Center</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{% static 'links/svgs/GRRC Logo.png' %}" alt="GRRC Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'about_us' %}" class="active">About Us</a></li>
+                <li><a href="{% url 'activities' %}">Activities</a></li>
+                <li><a href="{% url 'research' %}">Research</a></li>
+                <li><a href="{% url 'uga' %}">UGA</a></li>
+                <li><a href="{% url 'gender_clubs' %}">Gender Clubs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>About Us</h1>
+                    <p>Advancing gender equality through research, education, and advocacy</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="card">
+                    <h2>Our Mission</h2>
+                    <p>The Gender Research and Resource Center is dedicated to promoting gender equality and women's empowerment through research, education, and advocacy. We strive to create a more inclusive and equitable society for all.</p>
+                </div>
+
+                <div class="card">
+                    <h2>Our Vision</h2>
+                    <p>To be a leading center for gender research and advocacy, driving positive change in society through evidence-based policies and programs.</p>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>Research Excellence</h3>
+                        <p>Conducting cutting-edge research on gender issues and their impact on society.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Education & Training</h3>
+                        <p>Providing comprehensive gender education and training programs for various stakeholders.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Advocacy & Policy</h3>
+                        <p>Influencing policy and practice through evidence-based advocacy.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Our Team</h2>
+                <div class="grid">
+                    <div class="card">
+                        <img src="{% static 'links/icons/EmailIcon.png' %}" alt="Team Member" class="img-fluid">
+                        <h3>Director</h3>
+                        <p>Leading our center's initiatives and strategic direction.</p>
+                    </div>
+                    <div class="card">
+                        <img src="{% static 'links/icons/EmailIcon.png' %}" alt="Team Member" class="img-fluid">
+                        <h3>Research Coordinator</h3>
+                        <p>Overseeing research projects and publications.</p>
+                    </div>
+                    <div class="card">
+                        <img src="{% static 'links/icons/EmailIcon.png' %}" alt="Team Member" class="img-fluid">
+                        <h3>Program Manager</h3>
+                        <p>Managing educational programs and training initiatives.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: grrc@example.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Gender Research and Resource Center. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

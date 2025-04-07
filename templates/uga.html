@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGA - Gender Research and Resource Center</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{% static 'links/svgs/GRRC Logo.png' %}" alt="GRRC Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'activities' %}">Activities</a></li>
+                <li><a href="{% url 'research' %}">Research</a></li>
+                <li><a href="{% url 'uga' %}" class="active">UGA</a></li>
+                <li><a href="{% url 'gender_clubs' %}">Gender Clubs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>UGA Initiatives</h1>
+                    <p>Promoting gender equality in higher education</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="card">
+                    <h2>University Gender Programs</h2>
+                    <div class="grid">
+                        <div class="card">
+                            <img src="{% static 'links/icons/EmailIcon.png' %}" alt="Academic Program" class="img-fluid">
+                            <h3>Gender Studies Program</h3>
+                            <p>Comprehensive academic program offering courses and research opportunities in gender studies.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                        <div class="card">
+                            <img src="{% static 'links/icons/EmailIcon.png' %}" alt="Student Support" class="img-fluid">
+                            <h3>Student Support Services</h3>
+                            <p>Dedicated support services for students addressing gender-related concerns and needs.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                        <div class="card">
+                            <img src="{% static 'links/icons/EmailIcon.png' %}" alt="Faculty Development" class="img-fluid">
+                            <h3>Faculty Development</h3>
+                            <p>Programs to enhance faculty understanding and integration of gender perspectives in teaching.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Current Initiatives</h2>
+                <div class="card">
+                    <div class="grid">
+                        <div class="card">
+                            <h3>Gender Equity in STEM</h3>
+                            <p>Programs to increase and support women's participation in STEM fields.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check"></i> Mentorship programs</li>
+                                <li><i class="fas fa-check"></i> Research opportunities</li>
+                                <li><i class="fas fa-check"></i> Career development</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>Leadership Development</h3>
+                            <p>Initiatives to develop and support women leaders in academia.</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check"></i> Leadership workshops</li>
+                                <li><i class="fas fa-check"></i> Networking events</li>
+                                <li><i class="fas fa-check"></i> Professional development</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Resources</h2>
+                <div class="card">
+                    <div class="grid">
+                        <div class="card">
+                            <h3>Academic Resources</h3>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-book"></i> Gender studies library</li>
+                                <li><i class="fas fa-laptop"></i> Online resources</li>
+                                <li><i class="fas fa-users"></i> Study groups</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>Support Services</h3>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-comments"></i> Counseling services</li>
+                                <li><i class="fas fa-hand-holding-heart"></i> Support groups</li>
+                                <li><i class="fas fa-info-circle"></i> Information center</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Get Involved</h2>
+                <div class="card">
+                    <p>Join our university initiatives and make a difference:</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-user-plus"></i> Become a student member</li>
+                        <li><i class="fas fa-chalkboard-teacher"></i> Participate in faculty programs</li>
+                        <li><i class="fas fa-handshake"></i> Volunteer opportunities</li>
+                        <li><i class="fas fa-calendar-check"></i> Attend events and workshops</li>
+                    </ul>
+                    <a href="#" class="btn">Join Now</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: grrc@example.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Gender Research and Resource Center. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 
