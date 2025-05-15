@@ -1,0 +1,60 @@
+{% extends 'links/base.html' %}
+{% block title %}Activity Detail{% endblock %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto py-8">
+    
+    <div class="mb-8">
+        <a href="{% url 'activities' %}" 
+           class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500">
+            <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Activities
+        </a>
+    </div>
+
+    <article class="bg-white shadow-md rounded-lg overflow-hidden">
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-64 object-cover">
+        {% endif %}
+        
+        <div class="p-6">
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">{{ article.title }}</h1>
+            
+            <div class="flex items-center mb-4">
+                <div class="flex-shrink-0">
+                    <div class="h-10 w-10 rounded-full bg-[#A51C30] flex items-center justify-center">
+                        <span class="text-white font-bold">{{ article.author.first_name|first|upper }}</span>
+                    </div>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium text-gray-900">
+                        {{ article.author.first_name }} {{ article.author.last_name }}
+                    </p>
+                    <p class="text-sm text-gray-500">
+                        {{ article.created_at|date:"F j, Y" }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="prose max-w-none text-gray-700 mb-6">
+                {{ article.content|linebreaks }}
+            </div>
+
+            {% if article.pdf_file %}
+            <a href="{{ article.pdf_file.url }}" 
+               class="inline-flex items-center px-4 py-2 bg-[#A51C30] text-white rounded-md hover:bg-[#8b1728] transition-colors"
+               download>
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Download PDF
+            </a>
+            {% endif %}
+        </div>
+    </article>
+</div>
+
+{% endblock %}

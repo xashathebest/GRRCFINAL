@@ -1,0 +1,59 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for research in page_obj %}
+    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+        {% if research.image %}
+        <img src="{{ research.image.url }}" alt="{{ research.title }}" class="w-full h-48 object-cover">
+        {% else %}
+        <div class="w-full h-48 bg-[#A51C30]/10 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-[#A51C30]/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+        </div>
+        {% endif %}
+        <div class="p-6">
+            
+            <h3 class="text-xl font-bold text-gray-800 mb-3">{{ research.title }} </h3>
+            <span class="px-3 py-1 bg-violet-100 text-violet-800 text-sm rounded-full">{{ research.category|default:"General Topic" }}</span>
+            <p class="text-gray-600 mb-4">{{ research.summary|truncatewords:20 }}</p>
+            <a href="{% url 'research_detail' research.id %}" class="font-medium text-[#A51C30] hover:text-[#A51C30]/80 transition-colors flex items-center">
+                Read More
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="flex justify-center mt-12">
+    <nav class="flex items-center space-x-2">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 border border-gray-200 rounded-lg hover:bg-[#A51C30]/5 text-[#A51C30] flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Previous
+        </a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <span class="px-4 py-2 bg-[#A51C30] text-white rounded-lg">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a href="?page={{ num }}" class="px-4 py-2 border border-gray-200 rounded-lg hover:bg-[#A51C30]/5 text-[#A51C30]">
+            {{ num }}
+        </a>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 border border-gray-200 rounded-lg hover:bg-[#A51C30]/5 text-[#A51C30] flex items-center">
+            Next
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </a>
+        {% endif %}
+    </nav>
+</div>

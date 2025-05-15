@@ -1,0 +1,75 @@
+<div id="past-activities-container">
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for article in past_articles_page %}
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover-lift animate-on-scroll" style="animation-delay: {{ forloop.counter }}00ms">
+                        <div class="relative h-48">
+                            {% if article.image %}
+                                <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-full object-cover">
+                            {% else %}
+                                <img src="/static/links/svgs/womensmonth.jpg" alt="Default Image" class="w-full h-full object-cover">
+                            {% endif %} 
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">{{ article.title }}</h3>
+                            <p class="text-gray-600 mb-4">
+                                <span id="short-content-{{ article.id }}">{{ article.content|truncatewords:20 }}</span>
+                                <span id="full-content-{{ article.id }}" class="hidden">{{ article.content }}</span>
+                            </p>
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fas fa-calendar text-[#A51C30]"></i>
+                                <span>{{ article.created_at|date:"F d, Y" }}</span>
+                            </div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fas fa-user text-[#A51C30]"></i>
+                                <span>{{ article.author.first_name|title }} {{ article.author.last_name|title }}</span>
+                            </div>
+                            <a href="{% url 'activity_detail' article.id %}" id="read-more-btn-{{ article.id }}" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1 transition-colors duration-300">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+    </div>
+
+    {% if past_articles_page.paginator.num_pages > 1 %}
+                <div class="flex justify-center mt-12">
+                    <nav class="flex items-center space-x-2" id="pagination-links">
+                        {% if past_articles_page.has_previous %}
+                            <a href="?page={{ past_articles_page.previous_page_number }}" class="pagination-link px-4 py-2 border rounded-lg hover:bg-gray-100">Previous</a>
+                        {% endif %}
+                        {% for num in past_articles_page.paginator.page_range %}
+                            {% if past_articles_page.number == num %}
+                                <span class="px-4 py-2 bg-[#A51C30] text-white rounded-lg">{{ num }}</span>
+                            {% else %}
+                                <a href="?page={{ num }}" class="pagination-link px-4 py-2 border rounded-lg hover:bg-gray-100">{{ num }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if past_articles_page.has_next %}
+                            <a href="?page={{ past_articles_page.next_page_number }}" class="pagination-link px-4 py-2 border rounded-lg hover:bg-gray-100">Next</a>
+                        {% endif %}
+                    </nav>
+                </div>
+                {% endif %}
+</div>
+
+<script>
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.pagination-link')) {
+            e.preventDefault();
+            const url = e.target.getAttribute('href');
+
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('past-articles-container').innerHTML = html;
+                window.scrollTo({ top: document.getElementById('past-articles-container').offsetTop - 100, behavior: 'smooth' });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    });
+</script>

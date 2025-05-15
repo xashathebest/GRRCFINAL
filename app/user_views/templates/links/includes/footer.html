@@ -1,0 +1,113 @@
+<!-- Footer Section -->
+<footer class="bg-[var(--nav-background)] text-[var(--nav-text-color)] pt-16 pb-8 relative overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--primary-color)] to-transparent opacity-70"></div>
+    <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full bg-[var(--primary-color)]/10 blur-xl"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Top Footer Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14">
+            <!-- Contact Info -->
+            <div class="flex flex-col items-center md:items-start backdrop-blur-sm p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-6 relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 md:after:left-0 after:-translate-x-1/2 md:after:translate-x-0 after:w-16 after:h-[3px] after:bg-gradient-to-r after:from-[var(--primary-color)] after:to-[var(--secondary-color)]">Contact Us</h3>
+                {% if footer %}
+                <div class="flex flex-col space-y-4 mb-6 w-full">
+                    <p class="flex items-center transition-all duration-300 hover:translate-x-1 group">
+                        <span class="flex items-center justify-center bg-[var(--primary-color)]/10 w-10 h-10 rounded-full mr-3 group-hover:bg-[var(--primary-color)]/20 transition-all duration-300">
+                            <i class="fas fa-envelope text-[var(--primary-color)]"></i>
+                        </span>
+                        <a href="mailto:{{ footer.contact_email }}" class="hover:text-[var(--primary-color)] transition-colors duration-300">{{ footer.contact_email }}</a>
+                    </p>
+                    <p class="flex items-center transition-all duration-300 hover:translate-x-1 group">
+                        <span class="flex items-center justify-center bg-[var(--primary-color)]/10 w-10 h-10 rounded-full mr-3 group-hover:bg-[var(--primary-color)]/20 transition-all duration-300">
+                            <i class="fas fa-phone text-[var(--primary-color)]"></i>
+                        </span>
+                        <a href="tel:{{ footer.contact_phone }}" class="hover:text-[var(--primary-color)] transition-colors duration-300">{{ footer.contact_phone }}</a>
+                    </p>
+                </div>
+                {% endif %}
+                <div class="flex flex-col items-center md:items-start w-full">
+                    {% if footer and footer.logo %}
+                    <div class="transition-transform duration-300 hover:scale-105 mb-4">
+                        <img src="{{ footer.logo.url }}" alt="Logo" class="h-16 mx-auto md:mx-0 object-contain">
+                    </div>
+                    {% endif %}
+                    <p class="text-base font-medium text-[var(--nav-text-color)]/90">Research and Academic Excellence</p>
+                    <p class="text-sm text-[var(--nav-text-color)]/80 mt-1">Established 2023</p>
+                </div>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="flex flex-col items-center md:items-start backdrop-blur-sm p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-6 relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 md:after:left-0 after:-translate-x-1/2 md:after:translate-x-0 after:w-16 after:h-[3px] after:bg-gradient-to-r after:from-[var(--primary-color)] after:to-[var(--secondary-color)]">Quick Links</h3>
+                <ul class="space-y-3 w-full">
+                    <li class="transition-all duration-300 hover:translate-x-2 border-b border-[var(--nav-hover-color)]/10 pb-2">
+                        <a href="{% url 'about_us' %}" class="hover:text-[var(--primary-color)] flex items-center transition-colors duration-300">
+                            <i class="fas fa-chevron-right mr-2 text-xs text-[var(--primary-color)]"></i>About Us
+                        </a>
+                    </li>
+                    <li class="transition-all duration-300 hover:translate-x-2 border-b border-[var(--nav-hover-color)]/10 pb-2">
+                        <a href="{% url 'research' %}" class="hover:text-[var(--primary-color)] flex items-center transition-colors duration-300">
+                            <i class="fas fa-chevron-right mr-2 text-xs text-[var(--primary-color)]"></i>Research
+                        </a>
+                    </li>
+                    <li class="transition-all duration-300 hover:translate-x-2 border-b border-[var(--nav-hover-color)]/10 pb-2">
+                        <a href="{% url 'activities' %}" class="hover:text-[var(--primary-color)] flex items-center transition-colors duration-300">
+                            <i class="fas fa-chevron-right mr-2 text-xs text-[var(--primary-color)]"></i>Activities
+                        </a>
+                    </li>
+                    <li class="transition-all duration-300 hover:translate-x-2 border-b border-[var(--nav-hover-color)]/10 pb-2">
+                        <a href="{% url 'gender_clubs' %}" class="hover:text-[var(--primary-color)] flex items-center transition-colors duration-300">
+                            <i class="fas fa-chevron-right mr-2 text-xs text-[var(--primary-color)]"></i>Gender Clubs
+                        </a>
+                    </li>
+                    <li class="transition-all duration-300 hover:translate-x-2 border-b border-[var(--nav-hover-color)]/10 pb-2">
+                        <a href="{% url 'uga' %}" class="hover:text-[var(--primary-color)] flex items-center transition-colors duration-300">
+                            <i class="fas fa-chevron-right mr-2 text-xs text-[var(--primary-color)]"></i>UGA
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Social Media -->
+            <div class="flex flex-col items-center md:items-start backdrop-blur-sm p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-6 relative after:content-[''] after:absolute after:bottom-[-10px] after:left-1/2 md:after:left-0 after:-translate-x-1/2 md:after:translate-x-0 after:w-16 after:h-[3px] after:bg-gradient-to-r after:from-[var(--primary-color)] after:to-[var(--secondary-color)]">Follow Us</h3>
+                {% if footer %}
+                <div class="flex space-x-6 mb-6 w-full justify-center md:justify-start">
+                    {% if footer.social_facebook %}
+                    <a href="{{ footer.social_facebook }}" target="_blank" class="group">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[var(--primary-color)]/10 hover:bg-[var(--primary-color)]/20 transition-all duration-300 group-hover:scale-110">
+                            <i class="fab fa-facebook-f text-xl text-[var(--nav-text-color)] group-hover:text-[var(--primary-color)] transition-colors duration-300"></i>
+                        </div>
+                    </a>
+                    {% endif %}
+                    {% if footer.social_instagram %}
+                    <a href="{{ footer.social_instagram }}" target="_blank" class="group">
+                        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-[var(--primary-color)]/10 hover:bg-[var(--primary-color)]/20 transition-all duration-300 group-hover:scale-110">
+                            <i class="fab fa-instagram text-xl text-[var(--nav-text-color)] group-hover:text-[var(--primary-color)] transition-colors duration-300"></i>
+                        </div>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+                <p class="text-base text-[var(--nav-text-color)]/90 text-center md:text-left leading-relaxed">Stay connected with us on social media for the latest updates, events, and research publications.</p>
+            </div>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="mt-16 pt-8 border-t border-[var(--nav-hover-color)]/30 text-center relative">
+            <!-- Decorative elements -->
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div class="w-16 h-8 bg-[var(--nav-background)] flex items-center justify-center border-2 border-[var(--nav-hover-color)]/20 rounded-full">
+                    <div class="w-10 h-1 bg-gradient-to-r from-[var(--primary-color)] to-[var(--secondary-color)] rounded-full"></div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col items-center space-y-4">
+                <h4 class="text-lg font-medium text-[var(--nav-text-color)]/90">Gender Research and Resource Center</h4>
+                <p class="text-base text-[var(--nav-text-color)]/80 font-medium italic">Inspiring Change through Research</p>
+                <p class="text-sm text-[var(--nav-text-color)]/70">&copy; 2025 GRRC. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,297 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Article List - GRRC</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .sidebar {
-            transition: all 0.3s ease;
-            position: fixed;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            z-index: 999;
-        }
-        .sidebar.collapsed {
-            width: 5rem;
-        }
-        .sidebar.collapsed .nav-text {
-            display: none;
-        }
-        .main-content {
-            transition: all 0.3s ease;
-            margin-left: 16rem;
-            min-height: 100vh;
-        }
-        .main-content.expanded {
-            margin-left: 5rem;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        .nav-link {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        .nav-link.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background-color: white;
-        }
-        .toggle-btn {
-            transition: all 0.3s ease;
-        }
-        .toggle-btn:hover {
-            transform: scale(1.1);
-        }
-        .article-card {
-            transition: all 0.3s ease;
-        }
-        .article-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .btn-primary {
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .search-input:focus {
-            box-shadow: 0 0 0 2px rgba(165, 28, 48, 0.2);
-        }
-    </style>
-  </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+    
 
-  <body class="bg-gray-100">
-    {% if user_role == 'admin' or user_role == 'member' %}
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="sidebar bg-red-700 text-white w-64">
-            <div class="p-4">
-                <div class="flex items-center justify-between">
-                    <h1 class="text-xl font-bold">GRRC ADMIN</h1>
-                    <button id="toggleSidebar" class="toggle-btn text-white hover:text-gray-200 p-2 rounded-lg">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+{% extends 'links/base.html' %}
+
+{% block title %}Articles{% endblock %}
+{% block content %}
+
+
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+            <div class="mb-6 md:mb-0">
+                <h1 class="text-4xl font-extrabold text-gray-900 tracking-tight">Articles</h1>
+                <p class="mt-2 text-lg text-gray-600">Explore and manage your articles</p>
             </div>
-            <nav class="flex-1 mt-8">
-                <a href="{% url 'home' %}" class="nav-link flex items-center px-6 py-3 text-white">
-                    <i class="fas fa-home w-6"></i>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-                <a href="{% url 'article_list' %}" class="nav-link flex items-center px-6 py-3 text-white bg-red-800">
-                    <i class="fas fa-newspaper w-6"></i>
-                    <span class="nav-text">Articles</span>
-                </a>
-                <a href="{% url 'pending_articles' %}" class="nav-link flex items-center px-6 py-3 text-white">
-                    <i class="fas fa-clock w-6"></i>
-                    <span class="nav-text">Pending Articles</span>
-                </a>
-                {% if user_role == 'admin' %}
-                <a href="{% url 'account_list' %}" class="nav-link flex items-center px-6 py-3 text-white">
-                    <i class="fas fa-users w-6"></i>
-                    <span class="nav-text">User Management</span>
-                </a>
-                {% endif %}
-                <a href="{% url 'logout' %}" class="flex items-center px-6 py-3 text-white hover:bg-red-800 mt-80 pt-12">
-                    <i class="fas fa-sign-out-alt w-6"></i>
-                    <span>Logout</span>
-                </a>
-            </nav>
-            
+            <a href="{% url 'add_article' %}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-[#A463E6] hover:bg-[#9F59E6] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A463E6] transition-all duration-200 transform hover:-translate-y-0.5">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Create New Article
+            </a>
         </div>
-
-        <!-- Main Content -->
-        <div class="main-content flex-1 overflow-auto">
-            <div class="p-8">
-                <div class="max-w-7xl mx-auto animate-fade-in">
-                    <!-- Header -->
-                    <div class="flex justify-between items-center mb-8">
-                        <div>
-                            <h1 class="text-3xl font-bold text-gray-800">Articles</h1>
-                            <p class="text-gray-600">Manage your articles</p>
-                        </div>
-                        <a href="{% url 'add_article' %}" class="btn-primary px-6 py-2 bg-red-800 text-white rounded-lg hover:bg-red-900">
-                            <i class="fas fa-plus mr-2"></i>Add New Article
-                        </a>
+    <div id="articleList">
+        <!-- Controls -->
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <input class="search px-4 py-2 border rounded-md text-sm" placeholder="Search articles..." />
+            </div>
+            <div>
+                <select class="ml-4 px-4 py-2 border rounded-md text-sm" id="pageSize">
+                    <option value="3">Show 3</option>
+                    <option value="6" selected>Show 6</option>
+                    <option value="9">Show 9</option>
+                    <option value="12">Show 12</option>
+                </select>
+            </div>
+        </div>
+    
+        <!-- Article Grid -->
+        <div class="list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for article in articles %}
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="relative">
+                    {% if article.image %}
+                    <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-64 object-cover">
+                    {% else %}
+                    <div class="w-full h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <svg class="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
                     </div>
-
-                    <!-- Search and Filter -->
-                    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-                        <div class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1">
-                            <div class="relative">
-                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" id="searchInput" placeholder="Search pending articles..." class="search-input w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                    {% endif %}
+                </div>
+                <div class="p-6">
+                    <h3 class="name text-xl font-bold text-gray-900 mb-3 line-clamp-2">{{ article.title }}</h3>
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <div class="h-10 w-10 rounded-full bg-[#A463E6] flex items-center justify-center shadow-md">
+                                <span class="text-white font-bold text-sm">{{ article.author.first_name|first|upper }}</span>
                             </div>
                         </div>
-                        <div class="flex gap-4">
-                            <select id="sortFilter" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
-                            <option value="newest">Newest First</option>
-                            <option value="oldest">Oldest First</option>
-                            <option value="title">Title A-Z</option>
-                            </select>
-                        </div>
+                        <div class="ml-3">
+                            <p class="author text-sm font-medium text-gray-900">{{ article.author.first_name|title }} {{ article.author.last_name|title }}</p>
+                            <p class="text-sm text-gray-500">{{ article.created_at|date:"M d, Y" }}</p>
                         </div>
                     </div>
-
-                    <!-- Article Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {% for article in articles %}
-                        <div class="article-card bg-white rounded-lg shadow-md overflow-hidden">
-                            {% if article.image %}
-                            <div class="relative h-48">
-                                <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-full object-cover">
-                                
-                            </div>
-                            {% endif %}
-                            <div class="p-4">
-                                <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ article.title }}</h3>
-                                <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ article.content }}</p>
-                                <div class="flex items-center justify-between text-sm text-gray-500">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-user mr-2"></i>
-                                        <span>{{ article.author.first_name }} {{ article.author.last_name }}</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-calendar mr-2"></i>
-                                        <span>{{ article.created_at }}</span>
-                                    </div>
-                                    
-                                </div>
-                                <div class="mt-4 flex justify-end space-x-2">
-                                    <a href="{% url 'edit_article' article.id %}" class="text-blue-600 hover:text-blue-800">
-                                      <i class="fas fa-edit"></i>
-                                    </a>
-                                    
-                                    <button onclick="confirmDelete({{ article.id }})" class="text-red-600 hover:text-red-800">
-                                      <i class="fas fa-trash"></i>
-                                    </button>
-                                  </div>
-                            </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <div class="flex space-x-2">
+                            <a href="{% url 'edit_article' article.id %}" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#A463E6] transition-colors duration-200">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                                Edit
+                            </a>
+                            <a href="#" onclick="confirmArticleDelete({{ article.id }})" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-red-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                                Delete
+                            </a>
                         </div>
-                        {% empty %}
-                        <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-500">
-                            <p>No articles found.</p>
-                        </div>
-                        {% endfor %}
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
+    
+        <!-- Pagination -->
+        <div class="flex justify-center mt-8 pagination"></div>
     </div>
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
-        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-          <div class="text-center">
-            <i class="fas fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">Delete Article</h3>
-            <p class="text-gray-600 mb-6">Are you sure you want to delete this article? This action cannot be undone.</p>
-            <div class="flex justify-center space-x-4">
-              <button onclick="closeDeleteModal()" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-                Cancel
-              </button>
-              <form id="deleteForm" method="post" class="inline">
-                {% csrf_token %}
-                <button type="submit" class="btn-primary px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
-                  <i class="fas fa-trash mr-2"></i>Delete
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    {% else %}
-    <p>Access Denied. You do not have the required permissions to view this page.</p>
-    {% endif %}
-    <script>
-      document.getElementById('toggleSidebar').addEventListener('click', function() {
-        document.querySelector('.sidebar').classList.toggle('collapsed');
-        document.querySelector('.main-content').classList.toggle('expanded');
-      });
+</div>
 
-      // Delete Confirmation
-      function confirmDelete(articleId) {
-        const modal = document.getElementById('deleteModal');
-        const form = document.getElementById('deleteForm');
-        form.action = `{% url 'delete_article' 0 %}`.replace('0', articleId);
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-      }
-
-      function closeDeleteModal() {
-        const modal = document.getElementById('deleteModal');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      }
-
-      // Search and Filter
-      const searchInput = document.getElementById('searchInput');
-      const sortFilter = document.getElementById('sortFilter');
-      const articleCards = document.querySelectorAll('.article-card');
-
-      function filterArticles() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const sortBy = sortFilter.value;
-
-        articleCards.forEach(card => {
-          const title = card.querySelector('h3').textContent.toLowerCase();
-          const content = card.querySelector('p').textContent.toLowerCase();
-
-          const matchesSearch = title.includes(searchTerm) || content.includes(searchTerm);
-          card.style.display = matchesSearch ? 'block' : 'none';
-        });
-      }
-
-      searchInput.addEventListener('input', filterArticles);
-
-      sortFilter.addEventListener('change', () => {
-    const cards = Array.from(articleCards);
-    const sortBy = sortFilter.value;
-
-    cards.sort((a, b) => {
-        const dateA = parseDate(a.querySelector('.fa-calendar').nextElementSibling.textContent);
-        const dateB = parseDate(b.querySelector('.fa-calendar').nextElementSibling.textContent);
-
-        if (sortBy === 'newest') {
-            return dateB - dateA;  // Newest first
-        } else if (sortBy === 'oldest') {
-            return dateA - dateB;  // Oldest first
-        } else {
-            return a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent);
-        }
-    });
-
-    const container = cards[0].parentNode;
-    cards.forEach(card => container.appendChild(card));
-});
-
-// Function to parse date correctly
-function parseDate(dateStr) {
-    return new Date(dateStr.trim()) || new Date(0); // Fallback for invalid dates
+<script>
+function confirmArticleDelete(articleId) {
+    if (confirm('Are you sure you want to delete this article?')) {
+        window.location.href = `/delete_article/${articleId}/`;
+    }
 }
 
-    </script>
-  </body>
-</html>
+
+</script>
+
+<script>
+    const options = {
+        valueNames: ['name', 'author'],
+        page: 6,
+        pagination: true
+    };
+    
+    const articleList = new List('articleList', options);
+    
+    document.getElementById('pageSize').addEventListener('change', function() {
+        const newPageSize = parseInt(this.value);
+        articleList.page = newPageSize;
+        articleList.update(); // Refresh pagination
+    });
+</script>
+{% endblock %}

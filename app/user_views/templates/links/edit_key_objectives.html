@@ -1,0 +1,121 @@
+{% extends 'links/base.html' %}
+{% block title %}Edit Key Objectives{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden p-6 md:p-8">
+            <!-- Header Section -->
+            <div class="mb-8 border-b border-gray-200 pb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Edit Key Objectives</h1>
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="mt-4 p-3 bg-green-100 text-green-700 rounded-md">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-- Main Form -->
+            <form method="post" enctype="multipart/form-data" class="space-y-8" action="{% url 'update_key_objectives' %}">
+                {% csrf_token %}
+                
+                <!-- Heading Section -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Heading</label>
+                    <input type="text" name="heading" value="{{ key_objectives.heading }}" 
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition">
+                </div>
+
+                <!-- Introduction Section -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Introduction</label>
+                    <textarea name="intro" rows="4"
+                              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition">{{ key_objectives.intro }}</textarea>
+                </div>
+
+                <!-- Objectives Sections -->
+                <div class="space-y-6">
+                    <!-- Objective 1 -->
+                    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Objective 1</h3>
+                        <div class="space-y-4">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Title</label>
+                                <input type="text" name="objective_1_title" value="{{ key_objectives.objective_1_title }}" 
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition bg-white">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Description</label>
+                                <textarea name="objective_1_text" rows="3"
+                                          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition bg-white">{{ key_objectives.objective_1_text }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Objective 2 -->
+                    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Objective 2</h3>
+                        <div class="space-y-4">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Title</label>
+                                <input type="text" name="objective_2_title" value="{{ key_objectives.objective_2_title }}" 
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition bg-white">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Description</label>
+                                <textarea name="objective_2_text" rows="3"
+                                          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition bg-white">{{ key_objectives.objective_2_text }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Objective 3 -->
+                    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Objective 3</h3>
+                        <div class="space-y-4">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Title</label>
+                                <input type="text" name="objective_3_title" value="{{ key_objectives.objective_3_title }}" 
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition bg-white">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Description</label>
+                                <textarea name="objective_3_text" rows="3"
+                                          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition bg-white">{{ key_objectives.objective_3_text }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Objective 4 -->
+                    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Objective 4</h3>
+                        <div class="space-y-4">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Title</label>
+                                <input type="text" name="objective_4_title" value="{{ key_objectives.objective_4_title }}" 
+                                       class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition bg-white">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">Description</label>
+                                <textarea name="objective_4_text" rows="3"
+                                          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition bg-white">{{ key_objectives.objective_4_text }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit" 
+                            class="px-6 py-3 rounded-lg font-medium text-white bg-[#A463E6] hover:bg-[#9F59E6] transition shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2">
+                        Save All Objectives
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

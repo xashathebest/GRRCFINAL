@@ -1,0 +1,137 @@
+{% extends 'links/base.html' %}
+{% block title %}Manage Team{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-8">
+    <div class="bg-white rounded-lg shadow-md p-6 border border-blue-50">
+        <h2 class="text-2xl font-bold text-blue-800 mb-6 border-b border-blue-100 pb-2">
+            {{ form.instance.pk|default:"Add" }} Team Member
+        </h2>
+        
+        <form method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            
+            <!-- Name Field -->
+            <div class="space-y-2">
+                <label for="id_name" class="block text-sm font-medium text-blue-700">
+                    Full Name <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="name" id="id_name" 
+                       value="{{ form.name.value|default:'' }}"
+                       class="w-full px-3 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       required>
+                {% if form.name.errors %}
+                    {% for error in form.name.errors %}
+                    <p class="text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            <!-- Role Field -->
+            <div class="space-y-2">
+                <label for="id_role" class="block text-sm font-medium text-blue-700">
+                    Role <span class="text-red-500">*</span>
+                </label>
+                <input type="text" name="role" id="id_role" 
+                       value="{{ form.role.value|default:'' }}"
+                       class="w-full px-3 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       required>
+                {% if form.role.errors %}
+                    {% for error in form.role.errors %}
+                    <p class="text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            <!-- Email Field -->
+            <div class="space-y-2">
+                <label for="id_email" class="block text-sm font-medium text-blue-700">
+                    Email
+                </label>
+                <input type="email" name="email" id="id_email" 
+                       value="{{ form.email.value|default:'' }}"
+                       class="w-full px-3 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                    <p class="text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            <!-- LinkedIn URL Field -->
+            <div class="space-y-2">
+                <label for="id_linkedin_url" class="block text-sm font-medium text-blue-700">
+                    LinkedIn URL
+                </label>
+                <input type="url" name="linkedin_url" id="id_linkedin_url" 
+                       value="{{ form.linkedin_url.value|default:'' }}"
+                       class="w-full px-3 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="https://linkedin.com/in/username">
+                {% if form.linkedin_url.errors %}
+                    {% for error in form.linkedin_url.errors %}
+                    <p class="text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            <!-- Profile Image Field - Fixed Version -->
+            <div class="space-y-3">
+                <label class="block text-sm font-medium text-blue-700">
+                    Profile Image
+                </label>
+                
+                {% if form.instance.pk and form.instance.profile_image %}
+                <div class="flex items-start space-x-4">
+                    <div class="relative">
+                        <img src="{{ form.instance.profile_image.url }}" 
+                            alt="Current profile image" 
+                            class="h-20 w-20 rounded-full object-cover border-2 border-blue-200">
+                        <span class="absolute -bottom-1 -right-1 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                            Current
+                        </span>
+                    </div>
+                    <div class="flex-1 space-y-3">
+                        <label class="block cursor-pointer">
+                            <span class="inline-flex items-center px-3 py-2 border border-blue-300 rounded-md text-sm font-medium text-blue-700 bg-white hover:bg-blue-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                                Change Image
+                            </span>
+                            <input type="file" name="profile_image" id="id_profile_image" class="hidden" accept="image/*">
+                        </label>
+                        <p class="text-xs text-gray-500">Leave unchanged to keep current image</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="flex items-center">
+                    <label class="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        Upload Image
+                        <input type="file" name="profile_image" id="id_profile_image" class="hidden" accept="image/*">
+                    </label>
+                    <span class="ml-3 text-sm text-gray-500">JPEG or PNG (max 5MB)</span>
+                </div>
+                {% endif %}
+                
+                {% if form.profile_image.errors %}
+                    {% for error in form.profile_image.errors %}
+                    <p class="text-sm text-red-600">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            <div class="flex justify-end space-x-3 pt-4 border-t border-blue-100">
+                <a href="{% url 'team_list' %}" class="px-4 py-2 border border-blue-200 text-blue-700 rounded-md hover:bg-blue-50 transition-colors">
+                    Cancel
+                </a>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors shadow-sm">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

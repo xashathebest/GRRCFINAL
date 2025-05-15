@@ -1,0 +1,27 @@
+{% extends 'links/base.html' %}
+{% load static %}
+
+{% block title %}Delete Theme{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8 animate-fade-in">
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-lg shadow-md p-6 animate-scale-in">
+            <h1 class="text-2xl font-bold text-gray-900 mb-4">Delete Theme</h1>
+            <p class="text-gray-600 mb-6">Are you sure you want to delete the theme "{{ theme.name }}"? This action cannot be undone.</p>
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="flex justify-end space-x-4">
+                    <a href="{% url 'theme_settings' %}" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                        Cancel
+                    </a>
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+                        Delete Theme
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

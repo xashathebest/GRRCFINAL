@@ -1,0 +1,75 @@
+{% extends 'links/base.html' %}
+{% block title %}{{ research.title }} | Research Detail{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+    <!-- Back Button (Top) -->
+    <div class="mb-8">
+        <a href="javascript:history.back()" 
+           class="inline-flex items-center gap-2 text-[#A51C30] hover:text-[#8b1728] transition-colors group">
+            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            <span class="font-medium">Back to Research</span>
+        </a>
+    </div>
+
+    <!-- Article Container -->
+    <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <!-- Hero Image/Placeholder -->
+        <div class="relative h-72 bg-[#A51C30]/5">
+            {% if research.image %}
+                <img src="{{ research.image.url }}" alt="{{ research.title }}" class="w-full h-full object-cover">
+            {% else %}
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-[#A51C30]/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Content Section -->
+        <div class="p-8">
+            <!-- Title & Metadata -->
+            <div class="mb-8">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{{ research.title }}</h1>
+                
+                <div class="flex items-center gap-4">
+                    <!-- Author Badge -->
+                    <div class="flex items-center gap-3">
+                        <div class="h-10 w-10 rounded-full bg-[#A51C30] flex items-center justify-center text-white font-bold">
+                            {{ research.author.first_name|first|upper }}
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-900">{{ research.author.first_name }} {{ research.author.last_name }}</p>
+                            <p class="text-sm text-gray-500">{{ research.created_at|date:"F j, Y" }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Red Accent Bar -->
+                    <div class="hidden md:block flex-1 h-px bg-[#A51C30]/20"></div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="prose max-w-none text-gray-700 mb-10">
+                {{ research.content|linebreaks }}
+            </div>
+
+            <!-- PDF Download CTA -->
+            {% if research.pdf_file %}
+                <div class="mt-10 pt-6 border-t border-gray-100">
+                    <a href="{{ research.pdf_file.url }}" 
+                       class="inline-flex items-center gap-2 px-6 py-3 bg-[#A51C30] hover:bg-[#8b1728] text-white rounded-lg shadow-sm transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        <span class="font-medium">Download Full Research (PDF)</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </article>
+</div>
+{% endblock %}

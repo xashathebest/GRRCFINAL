@@ -1,0 +1,15 @@
+:root {
+    /* Theme Variables with defaults */
+    --primary-color: {{ active_theme.primary_color|default:'#A463E6' }};
+    --secondary-color: {{ active_theme.secondary_color|default:'#924DD8' }};
+    --button-color: {{ active_theme.button_color|default:'#A463E6' }};
+    --button-hover-color: {{ active_theme.button_hover_color|default:'#9F59E6' }};
+    --text-color: {{ active_theme.text_color|default:'#1F2937' }};
+    --background-color: {{ active_theme.background_color|default:'#F8FAFC' }};
+    --nav-background: {{ active_theme.nav_background|default:'#A463E6' }};
+    --nav-text-color: {{ active_theme.nav_text_color|default:'#FFFFFF' }};
+    --nav-hover-color: {{ active_theme.nav_hover_color|default:'#924DD8' }};
+    --success-color: {{ active_theme.success_color|default:'#10B981' }};
+    --warning-color: {{ active_theme.warning_color|default:'#F59E0B' }};
+    --error-color: {{ active_theme.error_color|default:'#EF4444' }};
+} 

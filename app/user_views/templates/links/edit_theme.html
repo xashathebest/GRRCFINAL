@@ -1,0 +1,99 @@
+{% extends 'links/base.html' %}
+{% load static %}
+
+{% block title %}Edit Theme{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8 animate-fade-in">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8 animate-slide-up">
+            <h1 class="text-3xl font-bold text-gray-900">Edit Theme</h1>
+            <p class="mt-2 text-gray-600">Modify the theme settings for "{{ theme.name }}"</p>
+        </div>
+
+        <!-- Edit Theme Form -->
+        <div class="bg-white rounded-lg shadow-md p-6 animate-scale-in">
+            <form method="POST" class="space-y-4">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Theme Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Theme Type</label>
+                        {{ form.theme }}
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Primary Color</label>
+                        {{ form.primary_color }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Secondary Color</label>
+                        {{ form.secondary_color }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Button Color</label>
+                        {{ form.button_color }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Button Hover</label>
+                        {{ form.button_hover_color }}
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Text Color</label>
+                        {{ form.text_color }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Background Color</label>
+                        {{ form.background_color }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nav Background</label>
+                        {{ form.nav_background }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nav Text Color</label>
+                        {{ form.nav_text_color }}
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nav Hover Color</label>
+                        {{ form.nav_hover_color }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Success Color</label>
+                        {{ form.success_color }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Warning Color</label>
+                        {{ form.warning_color }}
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Error Color</label>
+                        {{ form.error_color }}
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    {{ form.is_active }}
+                    <label class="ml-2 text-sm text-gray-700">Set as active theme</label>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <a href="{% url 'theme_settings' %}" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                        Cancel
+                    </a>
+                    <button type="submit" class="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

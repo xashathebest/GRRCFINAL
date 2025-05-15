@@ -1,0 +1,212 @@
+{% load static %}
+<nav class="bg-[var(--nav-background)] text-[var(--nav-text-color)] w-64 min-h-screen fixed left-0 top-0 transition-all duration-300 ease-in-out flex flex-col" id="sidebar">
+    <!-- User Profile Section (Fixed) -->
+    <div class="p-4">
+        <div class="mb-4">
+            <div class="flex items-center space-x-3 p-2 rounded-lg bg-[var(--primary-color)]">
+                <div class="h-10 w-10 rounded-full bg-[var(--secondary-color)] flex items-center justify-center">
+                    <span class="text-lg font-semibold text-white">{{ user_name|first|upper }}</span>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-white">{{ user_name }}</p>
+                    <p class="text-xs text-white/80">{{ user_role|title }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Content -->
+    <div class="flex-1 overflow-y-auto px-4 pb-4">
+        <div class="space-y-4">
+            <!-- Main Navigation -->
+            <div>
+                <p class="text-xs uppercase text-[var(--nav-text-color)] underline font-semibold px-2 mb-2">Navigation</p>
+                <div class="space-y-1">
+                    <a href="{% url 'home' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <!-- Posts Management -->
+            <div>
+                <p class="text-xs uppercase text-[var(--nav-text-color)] underline font-semibold px-2 mb-2">Posts Management</p>
+                <div class="space-y-1">
+                    <a href="{% url 'research_list' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        Research Studies
+                    </a>
+                    <a href="{% url 'article_list' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        </svg>
+                        Articles
+                    </a>
+                </div>
+            </div>
+
+            {% if user_role == 'admin' %}
+            <!-- Home Page Section -->
+            <div>
+                <p class="text-xs uppercase text-[var(--nav-text-color)] underline font-semibold px-2 mb-2">Home Page</p>
+                <div class="space-y-1">
+                    <a href="{% url 'manage_carousel' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        Manage Home Carousel
+                    </a>
+                    <a href="{% url 'manage_activities_carousel' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        Manage Activities Carousel
+                    </a>
+                    <a href="{% url 'manage_aboutus_carousel' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        Manage About Us Carousel
+                    </a>
+                    <a href="{% url 'manage_uga_carousel' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        Manage UGA Carousel
+                    </a>
+                    <a href="{% url 'manage_research_carousel' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        Manage Research Carousel
+                    </a>
+                    <a href="{% url 'mission_vision_info' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        </svg>
+                        Mission Vision
+                    </a>
+                    <a href="{% url 'key_objectives_info' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        </svg>
+                        Key Objectives
+                    </a>
+                    <a href="{% url 'edit_banner' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        </svg>
+                        Image Banner
+                    </a>
+                    <a href="{% url 'manage_cards' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        </svg>
+                        Manage Content Cards
+                    </a>
+                    <a href="{% url 'theme_settings' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        </svg>
+                        Theme Settings
+                    </a>
+                </div>
+            </div>
+
+            <!-- About Us Section -->
+            <div>
+                <p class="text-xs uppercase text-[var(--nav-text-color)] underline font-semibold px-2 mb-2">About Us</p>
+                <div class="space-y-1">
+                    <a href="{% url 'team_list' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        </svg>
+                        Manage Team
+                    </a>
+                </div>
+            </div>
+
+            <!-- Admin Tools -->
+            <div>
+                <p class="text-xs uppercase text-[var(--nav-text-color)] underline font-semibold px-2 mb-2">Admin Tools</p>
+                <div class="space-y-1">
+                    <a href="{% url 'account_list' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        User Management
+                    </a>
+                    <a href="{% url 'footer_info' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-lg transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                        </svg>
+                        Footer Settings
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Logout Section -->
+    <div class="p-4 border-t border-[var(--primary-color)]">
+        <div>
+            <p class="text-xs uppercase text-[var(--nav-text-color)] underline font-semibold px-2 mb-2">Account</p>
+            <div class="space-y-1">
+                <a href="{% url 'logout' %}" class="flex items-center px-2 py-2 text-[var(--nav-text-color)] hover:bg-red-600 hover:text-white rounded-lg transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                    Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<style>
+    #sidebar {
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+    
+    #sidebar .overflow-y-auto {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0.1);
+        flex: 1;
+        overflow-y: auto;
+    }
+    
+    #sidebar .overflow-y-auto::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    #sidebar .overflow-y-auto::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.1);
+        border-radius: 2px;
+    }
+    
+    #sidebar .overflow-y-auto::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.2);
+        border-radius: 2px;
+    }
+    
+    #sidebar .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+        background: rgba(0,0,0,0.3);
+    }
+
+    #sidebar .p-4:first-child {
+        flex-shrink: 0;
+    }
+
+    #sidebar .p-4:last-child {
+        flex-shrink: 0;
+    }
+</style>

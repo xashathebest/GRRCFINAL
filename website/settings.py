@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.user_views.apps.UserViewsConfig',
-    'markdownify',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +66,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.user_views.context_processors.footer_context',
+                'app.user_views.context_processors.hero_section_context',
+                'app.user_views.context_processors.mission_vision_context',
+                'app.user_views.context_processors.key_objectives_context',
+                'app.user_views.context_processors.banner_images',
+                'app.user_views.context_processors.content_cards_context',
+                'app.user_views.context_processors.team_members',
+                'app.user_views.context_processors.carousel_images',
+                'app.user_views.context_processors.theme_settings',
             ],
         },
     },
@@ -81,11 +89,15 @@ WSGI_APPLICATION = 'website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'finalgrrc_db',
-        'HOST' : '127.0.0.1',
-        'USER' : 'root',
-        'PASSWORD' : '',
-        'PORT' : '3306',
+        'NAME': 'finalgrrc_db',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
+            'charset': 'utf8mb4',
+        }
     }
 }
 

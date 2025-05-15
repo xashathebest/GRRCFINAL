@@ -1,0 +1,170 @@
+{% extends 'links/base.html' %}
+
+{% block title %}Edit Footer Information{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-[var(--background-color)] py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-[var(--background-color)] shadow-lg rounded-lg overflow-hidden p-6 md:p-8">
+            <!-- Header Section -->
+            <div class="mb-8 text-center border-b border-[var(--text-color)]/10 pb-6">
+                <h1 class="text-2xl font-bold text-[var(--text-color)]">Edit Footer Information</h1>
+                <p class="text-[var(--text-color)]/60 mt-2">Update your website's footer details</p>
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="mt-4 p-3 bg-[var(--secondary-color)]/10 text-[var(--secondary-color)] rounded-md">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-- Main Form -->
+            <form method="POST" action="{% url 'update_footer_info' %}" enctype="multipart/form-data" class="space-y-8">
+                {% csrf_token %}
+                
+                <!-- Contact Information Section -->
+                <div class="border-b border-[var(--text-color)]/10 pb-8">
+                    <h2 class="text-lg font-medium text-[var(--text-color)] mb-6 pb-2 border-b border-[var(--text-color)]/10">Contact Information</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Email -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-[var(--text-color)]">Email Address</label>
+                            <div class="relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-[var(--text-color)]/40"></i>
+                                </div>
+                                <input type="email" name="contact_email" value="{{ footer.contact_email }}" 
+                                       class="block w-full rounded-md py-2 px-3 border border-[var(--text-color)]/20 bg-[var(--background-color)] text-[var(--text-color)]" 
+                                       placeholder="contact@example.com">
+                            </div>
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-[var(--text-color)]">Phone Number</label>
+                            <div class="relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-phone text-[var(--text-color)]/40"></i>
+                                </div>
+                                <input type="text" name="contact_phone" value="{{ footer.contact_phone }}" 
+                                       class="block w-full rounded-md py-2 px-3 border border-[var(--text-color)]/20 bg-[var(--background-color)] text-[var(--text-color)]" 
+                                       placeholder="(+00) 000-0000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Section -->
+                <div class="border-b border-[var(--text-color)]/10 pb-8">
+                    <h2 class="text-lg font-medium text-[var(--text-color)] mb-6 pb-2 border-b border-[var(--text-color)]/10">Social Media Links</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Facebook -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-[var(--text-color)]">Facebook URL</label>
+                            <div class="relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fab fa-facebook text-[var(--text-color)]/40"></i>
+                                </div>
+                                <input type="url" name="social_facebook" value="{{ footer.social_facebook }}" 
+                                       class="block w-full rounded-md py-2 px-3 border border-[var(--text-color)]/20 bg-[var(--background-color)] text-[var(--text-color)]" 
+                                       placeholder="https://facebook.com/yourpage">
+                            </div>
+                        </div>
+                        
+                        <!-- Instagram -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-[var(--text-color)]">Instagram URL</label>
+                            <div class="relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fab fa-instagram text-[var(--text-color)]/40"></i>
+                                </div>
+                                <input type="url" name="social_instagram" value="{{ footer.social_instagram }}" 
+                                       class="block w-full rounded-md py-2 px-3 border border-[var(--text-color)]/20 bg-[var(--background-color)] text-[var(--text-color)]" 
+                                       placeholder="https://instagram.com/yourhandle">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logo Upload Section -->
+                <div class="pb-6">
+                    <h2 class="text-lg font-medium text-[var(--text-color)] mb-6 pb-2 border-b border-[var(--text-color)]/10">Logo</h2>
+                    
+                    <div class="flex flex-col gap-6">
+                        <!-- Current Logo Preview -->
+                        {% if footer.logo %}
+                            <div class="flex items-center gap-4">
+                                <p class="text-sm font-medium text-[var(--text-color)]">Current Logo:</p>
+                                <img src="{{ footer.logo.url }}" alt="Current logo" class="h-16 object-contain border border-[var(--text-color)]/20 p-2 rounded-lg">
+                            </div>
+                        {% endif %}
+                        
+                        <!-- Upload Field -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-[var(--text-color)]">Upload New Logo</label>
+                            <div class="border-2 border-dashed border-[var(--text-color)]/20 rounded-lg p-4">
+                                <input type="file" name="logo" accept="image/*" class="w-full">
+                                <p class="mt-2 text-xs text-[var(--text-color)]/60">PNG, JPG up to 2MB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Links Management Section -->
+                <!-- <div class="border-b border-[var(--text-color)]/10 pb-8">
+                    <h2 class="text-lg font-medium text-[var(--text-color)] mb-6 pb-2 border-b border-[var(--text-color)]/10">Footer Navigation Links</h2>
+                  -->
+                    
+                    <!-- Resources Section -->
+                    <!-- <div class="mb-6">
+                        <h3 class="text-md font-medium text-[var(--text-color)] mb-3">Resources</h3>
+                        <div class="bg-[var(--background-color)]/80 rounded-lg p-4 border border-[var(--text-color)]/10">
+                            {% if resources %}
+                                <div class="grid grid-cols-1 gap-3">
+                                    {% for link in resources %}
+                                        <div class="flex items-center justify-between border-b border-[var(--text-color)]/10 pb-2">
+                                            <div>
+                                                <p class="font-medium">{{ link.title }}</p>
+                                                <p class="text-sm text-[var(--text-color)]/60">{{ link.url }}</p>
+                                            </div>
+                                            <div class="flex space-x-2">
+                                                <a href="#" class="text-[var(--primary-color)]">Edit</a>
+                                                <a href="#" class="text-red-500">Delete</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="mt-3">
+                                    <button type="button" class="text-[var(--primary-color)] hover:underline text-sm">
+                                        <i class="fas fa-plus mr-1"></i> Add New Resource
+                                    </button>
+                                </div>
+                            {% else %}
+                                <p class="text-[var(--text-color)]/60 mb-3">No resources defined yet.</p>
+                                <button type="button" class="text-[var(--primary-color)] hover:underline text-sm">
+                                    <i class="fas fa-plus mr-1"></i> Add Resource
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div> -->
+                    
+                   
+                  
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit" 
+                            class="w-full md:w-auto px-6 py-3 rounded-lg font-medium text-white bg-[var(--button-color)] hover:bg-[var(--button-hover-color)] transition shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

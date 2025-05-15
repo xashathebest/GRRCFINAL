@@ -1,0 +1,367 @@
+{% extends 'links/base.html' %}
+{% load static %}
+
+{% block title %}Theme Settings{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Success Messages -->
+        {% if messages %}
+        <div class="mb-8">
+            {% for message in messages %}
+            <div class="rounded-md p-4 {% if message.tags == 'success' %}bg-green-50 text-green-700{% else %}bg-red-50 text-red-700{% endif %} animate-fade-in">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        {% if message.tags == 'success' %}
+                        <svg class="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        {% else %}
+                        <svg class="h-5 w-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        {% endif %}
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium">{{ message }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Theme Settings</h1>
+            <p class="mt-2 text-sm text-gray-600">Customize your website's appearance with our beautiful themes</p>
+        </div>
+
+        <!-- Predefined Themes -->
+        <div class="mb-12">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Quick Themes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Pride Theme -->
+                <div class="theme-card bg-gradient-to-r from-red-500 via-yellow-500 to-purple-500 p-1 rounded-xl cursor-pointer hover:scale-105 transition-transform" 
+                     onclick="applyTheme('pride')">
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-900">Pride Month</h3>
+                        <p class="text-sm text-gray-600">Celebrate diversity with our rainbow theme</p>
+                    </div>
+                </div>
+
+                <!-- Valentine's Theme -->
+                <div class="theme-card bg-gradient-to-r from-pink-500 to-red-500 p-1 rounded-xl cursor-pointer hover:scale-105 transition-transform"
+                     onclick="applyTheme('valentine')">
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-900">Valentine's Day</h3>
+                        <p class="text-sm text-gray-600">Romantic pink and red theme</p>
+                    </div>
+                </div>
+
+                <!-- Women's Month Theme -->
+                <div class="theme-card bg-gradient-to-r from-purple-400 to-pink-500 p-1 rounded-xl cursor-pointer hover:scale-105 transition-transform"
+                     onclick="applyTheme('womens_month')">
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-900">Women's Month</h3>
+                        <p class="text-sm text-gray-600">Celebrate women's achievements</p>
+                    </div>
+                </div>
+
+                <!-- Women in STEM Theme -->
+                <div class="theme-card bg-gradient-to-r from-blue-400 to-purple-500 p-1 rounded-xl cursor-pointer hover:scale-105 transition-transform"
+                     onclick="applyTheme('women_stem')">
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-900">Women in STEM</h3>
+                        <p class="text-sm text-gray-600">Honoring women in science and technology</p>
+                    </div>
+                </div>
+
+                <!-- Women's Empowerment Theme -->
+                <div class="theme-card bg-gradient-to-r from-rose-400 to-pink-500 p-1 rounded-xl cursor-pointer hover:scale-105 transition-transform"
+                     onclick="applyTheme('empowerment')">
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-900">Women's Empowerment</h3>
+                        <p class="text-sm text-gray-600">Celebrating strength and leadership</p>
+                    </div>
+                </div>
+
+                <!-- Custom Theme -->
+                <div class="theme-card bg-gradient-to-r from-gray-400 to-gray-600 p-1 rounded-xl cursor-pointer hover:scale-105 transition-transform"
+                     onclick="showCustomThemeForm()">
+                    <div class="bg-white p-4 rounded-lg">
+                        <h3 class="font-semibold text-gray-900">Custom Theme</h3>
+                        <p class="text-sm text-gray-600">Create your own unique theme</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Theme Form (Hidden by default) -->
+        <div id="customThemeForm" class="hidden bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Custom Theme</h2>
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Theme Name</label>
+                        <input type="text" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Primary Color</label>
+                        <input type="color" name="primary_color" value="#A463E6" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Secondary Color</label>
+                        <input type="color" name="secondary_color" value="#924DD8" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Button Color</label>
+                        <input type="color" name="button_color" value="#A463E6" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Button Hover Color</label>
+                        <input type="color" name="button_hover_color" value="#9F59E6" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Text Color</label>
+                        <input type="color" name="text_color" value="#1F2937" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Background Color</label>
+                        <input type="color" name="background_color" value="#F8FAFC" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nav Background</label>
+                        <input type="color" name="nav_background" value="#A463E6" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nav Text Color</label>
+                        <input type="color" name="nav_text_color" value="#FFFFFF" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nav Hover Color</label>
+                        <input type="color" name="nav_hover_color" value="#924DD8" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Success Color</label>
+                        <input type="color" name="success_color" value="#10B981" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Warning Color</label>
+                        <input type="color" name="warning_color" value="#F59E0B" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Error Color</label>
+                        <input type="color" name="error_color" value="#EF4444" class="mt-1 block w-full h-10 rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                </div>
+                <input type="hidden" name="theme" value="custom">
+                <input type="hidden" name="is_active" value="true">
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="hideCustomThemeForm()" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                        Save Theme
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Current Themes List -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Your Themes</h2>
+            <div class="space-y-4">
+                {% for theme in themes %}
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg {% if theme.is_active %}border-2 border-indigo-500{% endif %}">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-full" style="background: {{ theme.primary_color }}"></div>
+                        <div>
+                            <h3 class="font-medium text-gray-900">{{ theme.name }}</h3>
+                            <p class="text-sm text-gray-500">Created: {{ theme.created_at|date:"M d, Y" }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        {% if not theme.is_active %}
+                        <a href="{% url 'activate_theme' theme.id %}" class="px-3 py-1 text-sm text-indigo-600 hover:text-indigo-900">Activate</a>
+                        {% endif %}
+                        <a href="{% url 'edit_theme' theme.id %}" class="px-3 py-1 text-sm text-gray-600 hover:text-gray-900">Edit</a>
+                        <a href="{% url 'delete_theme' theme.id %}" class="px-3 py-1 text-sm text-red-600 hover:text-red-900">Delete</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const themes = {
+    pride: {
+        name: 'Pride Month',
+        primary_color: '#FF6B6B',  // Soft red
+        secondary_color: '#4ECDC4', // Teal
+        button_color: '#FF6B6B',   // Soft red
+        button_hover_color: '#FF8E8E', // Lighter red
+        text_color: '#2D3436',     // Dark gray
+        background_color: '#FFFFFF', // White
+        nav_background: '#FF6B6B',  // Soft red
+        nav_text_color: '#FFFFFF',  // White
+        nav_hover_color: '#FF8E8E', // Lighter red
+        success_color: '#00B894',   // Green
+        warning_color: '#FDCB6E',   // Yellow
+        error_color: '#FF6B6B'      // Soft red
+    },
+    valentine: {
+        name: 'Valentine\'s Day',
+        primary_color: '#FF8BA7',   // Soft pink
+        secondary_color: '#FF6B6B', // Soft red
+        button_color: '#FF8BA7',    // Soft pink
+        button_hover_color: '#FFA5BC', // Lighter pink
+        text_color: '#2D3436',      // Dark gray
+        background_color: '#FFF0F5', // Light pink
+        nav_background: '#FF8BA7',   // Soft pink
+        nav_text_color: '#FFFFFF',   // White
+        nav_hover_color: '#FFA5BC',  // Lighter pink
+        success_color: '#00B894',    // Green
+        warning_color: '#FDCB6E',    // Yellow
+        error_color: '#FF6B6B'       // Soft red
+    },
+    womens_month: {
+        name: 'Women\'s Month',
+        primary_color: '#9B4F96',   // Purple
+        secondary_color: '#FF8BA7', // Soft pink
+        button_color: '#9B4F96',    // Purple
+        button_hover_color: '#B06AAB', // Lighter purple
+        text_color: '#2D3436',      // Dark gray
+        background_color: '#FFF0F5', // Light pink
+        nav_background: '#9B4F96',   // Purple
+        nav_text_color: '#FFFFFF',   // White
+        nav_hover_color: '#B06AAB',  // Lighter purple
+        success_color: '#00B894',    // Green
+        warning_color: '#FDCB6E',    // Yellow
+        error_color: '#FF6B6B'       // Soft red
+    },
+    women_stem: {
+        name: 'Women in STEM',
+        primary_color: '#4ECDC4',   // Teal
+        secondary_color: '#9B4F96', // Purple
+        button_color: '#4ECDC4',    // Teal
+        button_hover_color: '#6ED7D0', // Lighter teal
+        text_color: '#2D3436',      // Dark gray
+        background_color: '#F7F9FC', // Light blue-gray
+        nav_background: '#4ECDC4',   // Teal
+        nav_text_color: '#FFFFFF',   // White
+        nav_hover_color: '#6ED7D0',  // Lighter teal
+        success_color: '#00B894',    // Green
+        warning_color: '#FDCB6E',    // Yellow
+        error_color: '#FF6B6B'       // Soft red
+    },
+    empowerment: {
+        name: 'Women\'s Empowerment',
+        primary_color: '#FF8BA7',   // Soft pink
+        secondary_color: '#9B4F96', // Purple
+        button_color: '#FF8BA7',    // Soft pink
+        button_hover_color: '#FFA5BC', // Lighter pink
+        text_color: '#2D3436',      // Dark gray
+        background_color: '#FFF0F5', // Light pink
+        nav_background: '#FF8BA7',   // Soft pink
+        nav_text_color: '#FFFFFF',   // White
+        nav_hover_color: '#FFA5BC',  // Lighter pink
+        success_color: '#00B894',    // Green
+        warning_color: '#FDCB6E',    // Yellow
+        error_color: '#FF6B6B'       // Soft red
+    }
+};
+
+function applyTheme(themeName) {
+    const theme = themes[themeName];
+    if (!theme) return;
+
+    // Show loading state on the clicked theme card
+    const themeCard = event.currentTarget;
+    const originalContent = themeCard.innerHTML;
+    themeCard.innerHTML = `
+        <div class="bg-white p-4 rounded-lg flex items-center justify-center">
+            <svg class="animate-spin h-5 w-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="ml-2 text-sm text-gray-600">Applying theme...</span>
+        </div>
+    `;
+
+    // Create a form and submit it
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '{% url "theme_settings" %}';
+
+    // Add CSRF token
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = 'csrfmiddlewaretoken';
+    csrfInput.value = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    form.appendChild(csrfInput);
+
+    // Add theme data
+    for (const [key, value] of Object.entries(theme)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+function showCustomThemeForm() {
+    document.getElementById('customThemeForm').classList.remove('hidden');
+}
+
+function hideCustomThemeForm() {
+    document.getElementById('customThemeForm').classList.add('hidden');
+}
+
+// Add animation for success messages
+document.addEventListener('DOMContentLoaded', function() {
+    const messages = document.querySelectorAll('.animate-fade-in');
+    messages.forEach(message => {
+        message.style.opacity = '0';
+        message.style.transform = 'translateY(-10px)';
+        message.style.transition = 'all 0.3s ease-out';
+        
+        setTimeout(() => {
+            message.style.opacity = '1';
+            message.style.transform = 'translateY(0)';
+        }, 100);
+
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            message.style.opacity = '0';
+            message.style.transform = 'translateY(-10px)';
+            setTimeout(() => message.remove(), 300);
+        }, 5000);
+    });
+});
+</script>
+
+<style>
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+{% endblock %} 

@@ -1,206 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New User - GRRC</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .sidebar {
-            transition: all 0.3s ease;
-        }
-        .sidebar.collapsed {
-            width: 5rem;
-        }
-        .main-content {
-            transition: all 0.3s ease;
-        }
-        .main-content.expanded {
-            margin-left: 5rem;
-        }
-        .form-group {
-            transition: all 0.3s ease;
-        }
-        .form-group:focus-within {
-            transform: translateY(-2px);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
-    </style>
-</head>
-<body class="bg-gray-100">
-    {% if user_role == 'admin' %}
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="sidebar bg-red-700 text-white w-64 min-h-screen">
-            <div class="p-4">
-                <div class="flex items-center justify-between">
-                    <h1 class="text-md font-bold">GRRC ADMIN</h1>
-                    <button id="toggleSidebar" class="text-white hover:text-gray-200">
-                        <i class="fas fa-bars"></i>
-                    </button>
+{% extends 'links/base.html' %}
+{% block title %}Add Users{% endblock %}
+{% block content %}
+{% if user_role == 'admin' %}
+<div class="flex h-screen">
+    <!-- Main Content -->
+    <div class="main-content flex-1 overflow-auto">
+        <div class="p-8">
+            <div class="max-w-2xl mx-auto animate-fade-in">
+                <!-- Header -->
+                <div class="mb-8 animate-slide-up">
+                    <h1 class="text-3xl font-bold text-gray-800">Add New User</h1>
+                    <p class="text-gray-600">Create a new user account</p>
                 </div>
-            </div>
-            <nav class="mt-8">
-                <a href="{% url 'home' %}" class="flex items-center px-6 py-3 text-white hover:bg-red-800">
-                    <i class="fas fa-home w-6"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="{% url 'article_list' %}" class="flex items-center px-6 py-3 text-white hover:bg-red-800">
-                    <i class="fas fa-newspaper w-6"></i>
-                    <span>Articles</span>
-                </a>
-                <a href="{% url 'pending_articles' %}" class="flex items-center px-6 py-3 text-white hover:bg-red-800">
-                    <i class="fas fa-clock w-6"></i>
-                    <span>Pending Articles</span>
-                </a>
-                <a href="{% url 'account_list' %}" class="flex items-center px-6 py-3 text-white bg-red-800">
-                    <i class="fas fa-users w-6"></i>
-                    <span>User Management</span>
-                </a>
-                <a href="{% url 'logout' %}" class="flex items-center px-6 py-3 text-white hover:bg-red-800 mt-80 pt-12 ">
-                    <i class="fas fa-sign-out-alt w-6"></i>
-                    <span>Logout</span>
-                </a>
-            </nav>
-        </div>
 
-        <!-- Main Content -->
-        <div class="main-content flex-1 overflow-auto">
-            <div class="p-8">
-                <div class="max-w-2xl mx-auto animate-fade-in">
-                    <!-- Header -->
-                    <div class="mb-8">
-                        <h1 class="text-3xl font-bold text-gray-800">Add New User</h1>
-                        <p class="text-gray-600">Create a new user account</p>
+                <!-- Form -->
+                <form method="post" class="bg-white rounded-lg shadow-md p-6 animate-scale-in">
+                    {% csrf_token %}
+
+                    <!-- First Name -->
+                    <div class="form-group mb-6 animate-slide-up" style="animation-delay: 0.1s">
+                        <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            First Name
+                        </label>
+                        {{ form.first_name }}
+                        {% if form.first_name.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.first_name.errors.0 }}</p>
+                        {% endif %}
                     </div>
 
-                    <!-- Form -->
-                    <form method="post" class="bg-white rounded-lg shadow-md p-6">
-                        {% csrf_token %}
-                        
-                        <!-- First Name -->
-                        <div class="form-group mb-6">
-                            <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                First Name
-                            </label>
-                            {{ form.first_name }}
-                            {% if form.first_name.errors %}
-                            <p class="mt-1 text-sm text-red-600">{{ form.first_name.errors.0 }}</p>
-                            {% endif %}
-                        </div>
+                    <!-- Last Name -->
+                    <div class="form-group mb-6 animate-slide-up" style="animation-delay: 0.2s">
+                        <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Last Name
+                        </label>
+                        {{ form.last_name }}
+                        {% if form.last_name.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.last_name.errors.0 }}</p>
+                        {% endif %}
+                    </div>
 
-                        <!-- Last Name -->
-                        <div class="form-group mb-6">
-                            <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                Last Name
-                            </label>
-                            {{ form.last_name }}
-                            {% if form.last_name.errors %}
-                            <p class="mt-1 text-sm text-red-600">{{ form.last_name.errors.0 }}</p>
-                            {% endif %}
-                        </div>
+                    <!-- Email -->
+                    <div class="form-group mb-6 animate-slide-up" style="animation-delay: 0.3s">
+                        <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Email Address
+                        </label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.email.errors.0 }}</p>
+                        {% endif %}
+                    </div>
 
-                        <!-- Email -->
-                        <div class="form-group mb-6">
-                            <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                Email Address
-                            </label>
-                            {{ form.email }}
-                            {% if form.email.errors %}
-                            <p class="mt-1 text-sm text-red-600">{{ form.email.errors.0 }}</p>
-                            {% endif %}
-                        </div>
+                    <!-- Role -->
+                    <div class="form-group mb-6 animate-slide-up" style="animation-delay: 0.4s">
+                        <label for="{{ form.role.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            User Role
+                        </label>
+                        {{ form.role }}
+                        {% if form.role.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.role.errors.0 }}</p>
+                        {% endif %}
+                    </div>
 
-                        <!-- Role -->
-                        <div class="form-group mb-6">
-                            <label for="{{ form.role.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                User Role
-                            </label>
-                            {{ form.role }}
-                            {% if form.role.errors %}
-                            <p class="mt-1 text-sm text-red-600">{{ form.role.errors.0 }}</p>
-                            {% endif %}
-                        </div>
+                    <!-- Password -->
+                    <div class="form-group mb-6 animate-slide-up" style="animation-delay: 0.5s">
+                        <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Password
+                        </label>
+                        {{ form.password }}
+                        {% if form.password.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.password.errors.0 }}</p>
+                        {% endif %}
+                        <p class="mt-1 text-sm text-gray-500">{{ form.password.help_text }}</p>
+                    </div>
 
-                        <!-- Password -->
-                        <div class="form-group mb-6">
-                            <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                Password
-                            </label>
-                            {{ form.password }}
-                            {% if form.password.errors %}
-                            <p class="mt-1 text-sm text-red-600">{{ form.password.errors.0 }}</p>
-                            {% endif %}
-                            <p class="mt-1 text-sm text-gray-500">{{ form.password.help_text }}</p>
-                        </div>
+                    <!-- Confirm Password -->
+                    <div class="form-group mb-6 animate-slide-up" style="animation-delay: 0.6s">
+                        <label for="{{ form.confirm_password.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Confirm Password
+                        </label>
+                        {{ form.confirm_password }}
+                        {% if form.confirm_password.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ form.confirm_password.errors.0 }}</p>
+                        {% endif %}
+                    </div>
 
-                        <!-- Confirm Password -->
-                        <div class="form-group mb-6">
-                            <label for="{{ form.confirm_password.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
-                                Confirm Password
-                            </label>
-                            {{ form.confirm_password }}
-                            {% if form.confirm_password.errors %}
-                            <p class="mt-1 text-sm text-red-600">{{ form.confirm_password.errors.0 }}</p>
-                            {% endif %}
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="flex justify-end space-x-4">
-                            <a href="{% url 'account_list' %}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-                                Cancel
-                            </a>
-                            <button type="submit" class="btn-primary px-6 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800">
-                                <i class="fas fa-user-plus mr-2"></i>Add User
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <!-- Submit Button -->
+                    <div class="flex justify-end space-x-4 animate-slide-up" style="animation-delay: 0.7s">
+                        <a href="{% url 'account_list' %}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-all duration-200 hover:-translate-y-0.5">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn-primary px-6 py-2 bg-[#A463E6] text-white rounded-lg hover:bg-[#9F59E6] transition-all duration-200 hover:-translate-y-0.5">
+                            <i class="fas fa-user-plus mr-2"></i>Add User
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        // Sidebar Toggle
-        const sidebar = document.querySelector('.sidebar');
-        const mainContent = document.querySelector('.main-content');
-        const toggleButton = document.getElementById('toggleSidebar');
+<script>
+    // Sidebar Toggle
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+    const toggleButton = document.getElementById('toggleSidebar');
 
+    if (toggleButton) {
         toggleButton.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
             mainContent.classList.toggle('expanded');
         });
+    }
 
-        // Add active state to current page link
-        const currentPath = window.location.pathname;
-        const navLinks = document.querySelectorAll('nav a');
-        navLinks.forEach(link => {
-            if (link.getAttribute('href') === currentPath) {
-                link.classList.add('bg-red-800');
-                link.classList.remove('hover:bg-red-800');
-            }
-        });
-    </script>
-    {% else %}
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
-        <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-            <div class="text-center">
-                <i class="fas fa-exclamation-circle text-6xl text-red-500 mb-4"></i>
-                <h1 class="text-2xl font-bold text-gray-800 mb-2">Access Denied</h1>
-                <p class="text-gray-600 mb-6">You do not have permission to view this page.</p>
-                <a href="{% url 'login' %}" class="inline-block bg-[#A51C30] text-white px-6 py-2 rounded-lg hover:bg-red-800 transition-colors">
-                    Return to Login
-                </a>
-            </div>
-        </div>
+    // Add active state to current page link
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('bg-red-800');
+            link.classList.remove('hover:bg-red-800');
+        }
+    });
+</script>
+
+{% else %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="p-8 bg-white rounded-lg shadow-md animate-scale-in">
+        <h2 class="text-2xl font-bold text-red-600 mb-4">Access Denied</h2>
+        <p class="text-gray-600">You do not have permission to access this page.</p>
     </div>
-    {% endif %}
-</body>
-</html>
+</div>
+{% endif %}
+{% endblock %}

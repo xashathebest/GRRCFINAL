@@ -1,403 +1,263 @@
+{% extends 'links/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research - Gender Research and Resource Center</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        poppins: ['Poppins', 'sans-serif'],
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.5s ease-in-out',
-                        'slide-up': 'slideUp 0.5s ease-out',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                    },
-                },
-            },
-        }
-    </script>
-    <style type="text/tailwindcss">
-        .container {
-            @apply w-4/5 mx-auto p-5;
-        }
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease-out;
-        }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-    </style>
-</head>
-<body class="bg-white">
-    <header class="fixed mt-5 top-0 left-1/2 -translate-x-1/2 z-30 w-11/12 lg:w-9/12 p-4 rounded-3xl lg:bg-gradient-to-r lg:from-[#E182CA]/80 lg:to-[#B772FE]/80 lg:border-2 lg:border-violet-500 transition-transform duration-300" id="navbar">
-        <div class="mx-auto">
-            <div class="flex justify-between items-center w-full">
-                <!-- Logo Section -->
-                <div class="flex items-center space-x-4">
-                    <img src="/static/links/grrc_img/wmsu.png" alt="WMSU Logo" class="w-12 h-12">
-                    <img src="/static/links/grrc_img/GRRC Logo.png" alt="GRRC Logo" class="w-12 h-12">
-                </div>
 
-                <!-- Desktop Navigation - Centered -->
-                <div class="hidden lg:flex items-center justify-center gap-8 flex-1">
-                    <a href="{% url 'index' %}" class="text-white text-sm hover:text-violet-200 transition-colors">Home</a>
-                    <a href="{% url 'activities' %}" class="text-white text-sm hover:text-violet-200 transition-colors">Activities</a>
-                    <a href="{% url 'about_us' %}" class="text-white text-sm hover:text-violet-200 transition-colors">About Us</a>
-                    <a href="{% url 'uga' %}" class="text-white text-sm hover:text-violet-200 transition-colors">UGA</a>
-                    <a href="{% url 'research' %}" class="text-white text-sm hover:text-violet-200 transition-colors">Research</a>
+{% block content %}
+<header
+  class="fixed mt-5 top-0 left-1/2 -translate-x-1/2 z-30 w-11/12 lg:w-9/12 p-4 rounded-3xl bg-[var(--nav-background)] border-2 border-[var(--primary-color)] transition-all duration-300"
+  id="navbar"
+>
+  {% include 'links/includes/header.html' %}
+</header>
 
-                    <!-- Gender Clubs Dropdown -->
-                    <div class="relative group">
-                        <button class="text-white text-sm hover:text-violet-200 transition-colors flex items-center gap-1">
-                            Gender Clubs
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                        <div class="absolute left-0 w-72 bg-gray-100 rounded-lg shadow-lg py-2 hidden group-hover:block hover:block transform -translate-x--1/4">
-                            <a href="https://www.facebook.com/search/top?q=ccs-gender%20club" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Computing Studies</a>
-                            <a href="https://www.facebook.com/profile.php?id=100093717316260" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Engineering</a>
-                            <a href="https://www.facebook.com/profile.php?id=100087148836205" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Nursing</a>
-                            <a href="https://www.facebook.com/CTEGenderClub" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Teacher Education</a>
-                            <a href="https://www.facebook.com/WMSUCLAGenderClub" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Liberal Arts</a>
-                            <a href="https://www.facebook.com/WMSUCSMGenderClub" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Science and Mathematics</a>
-                            <a href="https://www.facebook.com/profile.php?id=100094464625499" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Sport Science and Physical Education</a>
-                            <a href="https://www.facebook.com/WMSUCCJEGENDERSCLUB" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Criminal Justice Education</a>
-                            <a href="https://www.facebook.com/profile.php?id=61553350412685" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Public Administration</a>
-                            <a href="https://www.facebook.com/wmsucarchgenderclub" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Public Architecture</a>
-                            <a href="https://www.facebook.com/profile.php?id=100080166283438" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Home Economics</a>
-                            <a href="https://www.facebook.com/profile.php?id=61560413797983" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Asian and Islamic Studies</a>
-                            <a href="https://www.facebook.com/profile.php?id=100086428662391" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of Forestry and Environmental Studies</a>
-                            <a href="https://www.facebook.com/profile.php?id=100086894635444" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-100 transition-colors">College of External Studies Diplahan</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Join Us Button -->
-                <a href="{% url 'login' %}">
-                    <button class="hidden lg:block bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors">
-                        Login
-                    </button>
-                </a>
-
-                <!-- Mobile Menu Button -->
-                <button id="menu-btn" class="lg:hidden text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </header>
-
+<main class="pt-20">
     <!-- Mobile Side Navigation -->
-    <nav id="menu" class="fixed top-0 right-0 h-screen w-64 md:w-80 bg-violet-500 text-white transform translate-x-full transition-transform duration-300 ease-in-out z-20 pt-20">
+    <nav id="menu" class="fixed top-0 right-0 h-screen w-64 md:w-80 bg-[var(--nav-background)] text-[var(--nav-text-color)] transform translate-x-full transition-transform duration-300 ease-in-out z-20 pt-20 lg:hidden">
         <div class="flex flex-col gap-6 p-6">
-            <a href="{% url 'index' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">Home</a>
-            <a href="{% url 'activities' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">Activities</a>
-            <a href="{% url 'about_us' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">About Us</a>
-            <a href="{% url 'uga' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">UGA</a>
-            <a href="{% url 'research' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">Research</a>
-            <a href="{% url 'gender_clubs' %}" class="text-sm md:text-xs hover:text-violet-200 transition-colors">Gender Clubs</a>
+            <a href="{% url 'index' %}" class="text-sm md:text-xs hover:text-[var(--primary-color)] transition-colors">Home</a>
+            <a href="{% url 'activities' %}" class="text-sm md:text-xs hover:text-[var(--primary-color)] transition-colors">Activities</a>
+            <a href="{% url 'about_us' %}" class="text-sm md:text-xs hover:text-[var(--primary-color)] transition-colors">About Us</a>
+            <a href="{% url 'uga' %}" class="text-sm md:text-xs hover:text-[var(--primary-color)] transition-colors">UGA</a>
+            <a href="{% url 'research' %}" class="text-sm md:text-xs hover:text-[var(--primary-color)] transition-colors">Research</a>
+            <a href="{% url 'gender_clubs' %}" class="text-sm md:text-xs hover:text-[var(--primary-color)] transition-colors">Gender Clubs</a>
             <a href="{% url 'login' %}">
-                <button class="bg-orange-500 px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors w-full">
+                <button class="bg-[var(--button-color)] hover:bg-[var(--button-hover-color)] text-white px-4 py-2 rounded-lg transition-colors w-full">
                     Login
                 </button>
             </a>
         </div>
     </nav>  
 
-    <main class="pt-20">
-        <!-- Hero Section with Image -->
-        <section class="relative h-[500px] overflow-hidden">
-            <img src="/static/links/svgs/womensmonth.jpg" alt="Research Hero" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center">
-                <div class="container mx-auto px-4">
-                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 animate-slide-up">Research & Publications</h1>
-                    <p class="text-xl text-white max-w-2xl animate-slide-up" style="animation-delay: 0.2s">Advancing gender equality through rigorous research and evidence-based solutions</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Category Filter Buttons -->
-        <section class="py-8 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-wrap justify-center gap-4 animate-on-scroll">
-                    <button class="px-6 py-3 bg-[#A51C30] text-white rounded-lg hover:bg-[#8b1728] transition-colors flex items-center gap-2">
-                        <i class="fas fa-graduation-cap"></i>
-                        Education
-                    </button>
-                    <button class="px-6 py-3 border-2 border-[#A51C30] text-[#A51C30] rounded-lg hover:bg-[#A51C30] hover:text-white transition-all duration-300 hover:shadow-lg">
-                        <i class="fas fa-briefcase"></i>
-                        Workplace
-                    </button>
-                    <button class="px-6 py-3 border-2 border-[#A51C30] text-[#A51C30] rounded-lg hover:bg-[#A51C30] hover:text-white transition-all duration-300 hover:shadow-lg">
-                        <i class="fas fa-users"></i>
-                        Social Studies
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Research -->
-        <section class="py-16 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 animate-on-scroll">Featured Research</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Featured Research Card 1 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                        <img src="/static/links/svgs/womensmonth.jpg" alt="Women's Month Research" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="px-3 py-1 bg-[#A51C30] text-white text-sm rounded-full">Featured</span>
-                                <span class="px-3 py-1 bg-violet-100 text-violet-800 text-sm rounded-full">Education</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2">Women's Leadership in Higher Education</h3>
-                            <p class="text-gray-600 mb-4">A comprehensive study on women's representation in academic leadership positions across Philippine universities.</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-500">March 2024</span>
-                                <a href="#" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1">
-                                    Read More <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Featured Research Card 2 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                        <img src="/static/links/svgs/withpres.jpg" alt="Workplace Research" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="px-3 py-1 bg-[#A51C30] text-white text-sm rounded-full">Featured</span>
-                                <span class="px-3 py-1 bg-violet-100 text-violet-800 text-sm rounded-full">Workplace</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2">Gender Pay Gap in Philippine Industries</h3>
-                            <p class="text-gray-600 mb-4">Analysis of wage disparities and career advancement opportunities across different sectors.</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-500">March 2024</span>
-                                <a href="#" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1">
-                                    Read More <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Featured Research Card 3 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                        <img src="/static/links/svgs/grrcparade.jpg" alt="Social Research" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="px-3 py-1 bg-[#A51C30] text-white text-sm rounded-full">Featured</span>
-                                <span class="px-3 py-1 bg-violet-100 text-violet-800 text-sm rounded-full">Social Studies</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2">Gender Representation in Media</h3>
-                            <p class="text-gray-600 mb-4">Study on gender stereotypes and representation in Philippine media and entertainment.</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-500">March 2024</span>
-                                <a href="#" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1">
-                                    Read More <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
+    <!-- Hero Section -->
+    <section class="relative h-[500px] overflow-hidden animate-fade-in">
+        <!-- Carousel Container -->
+        <div class="carousel-container absolute inset-0 w-full h-full">
+            {% for image in carousel_images %}
+            <div class="carousel-slide absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-500{% if forloop.first %} opacity-100{% else %} opacity-0{% endif %}"
+                 style="background-image: url('{{ image.image.url }}');">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center">
+                    <div class="container mx-auto px-4">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 animate-slide-up">{{ image.title }}</h1>
+                        <p class="text-xl text-white max-w-2xl animate-slide-up" style="animation-delay: 0.2s">{{ image.subtitle }}</p>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Latest Research -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 animate-on-scroll">Latest Research</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Research Card 1 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                        <img src="/static/links/svgs/womensmonth.jpg" alt="Research 1" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <span class="inline-block px-3 py-1 bg-[#A51C30] text-white rounded-full text-sm mb-4">Education</span>
-                            <h3 class="text-xl font-semibold mb-2">Gender-Sensitive Curriculum Development</h3>
-                            <p class="text-gray-600 mb-4">Analysis of gender representation in educational materials and curricula.</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-500">2024</span>
-                                <a href="#" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1">
-                                    Read More <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Research Card 2 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                        <img src="/static/links/svgs/withpres.jpg" alt="Research 2" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <span class="inline-block px-3 py-1 bg-[#A51C30] text-white rounded-full text-sm mb-4">Workplace</span>
-                            <h3 class="text-xl font-semibold mb-2">Work-Life Balance Policies</h3>
-                            <p class="text-gray-600 mb-4">Evaluation of family-friendly workplace policies and their impact.</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-500">2024</span>
-                                <a href="#" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1">
-                                    Read More <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Research Card 3 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                        <img src="/static/links/svgs/grrcparade.jpg" alt="Research 3" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <span class="inline-block px-3 py-1 bg-[#A51C30] text-white rounded-full text-sm mb-4">Social Studies</span>
-                            <h3 class="text-xl font-semibold mb-2">Cultural Norms and Gender Roles</h3>
-                            <p class="text-gray-600 mb-4">Study of traditional gender roles in different cultural contexts.</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-500">2024</span>
-                                <a href="#" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1">
-                                    Read More <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
+            {% empty %}
+            <div class="carousel-slide absolute inset-0 w-full h-full bg-cover bg-center opacity-100"
+                 style="background-image: url('{% static 'links/grrc_img/grrcimage4.jpg' %}');">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center">
+                    <div class="container mx-auto px-4">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 animate-slide-up">Research</h1>
+                        <p class="text-xl text-white max-w-2xl animate-slide-up" style="animation-delay: 0.2s">Explore our research initiatives and publications in gender studies.</p>
                     </div>
                 </div>
-
-                <!-- Pagination -->
-                <div class="flex justify-center mt-12 animate-on-scroll">
-                    <nav class="flex items-center space-x-2">
-                        <a href="#" class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors duration-300">Previous</a>
-                        <a href="#" class="px-4 py-2 bg-[#A51C30] text-white rounded-lg">1</a>
-                        <a href="#" class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors duration-300">2</a>
-                        <a href="#" class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors duration-300">3</a>
-                        <a href="#" class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors duration-300">Next</a>
-                    </nav>
-                </div>
             </div>
-        </section>
-    </main>
-
-    <footer class="bg-gradient-to-l from-[#E182CA]/80 to-[#B772FE]/80 text-white gap-20 text-right p-4">
-        <div class="flex items-center justify-end gap-2">
-            <div class="bg-white p-1 rounded">
-                <img src="/static/links/icons/EmailIcon.png" alt="EmailIcon" class="w-6 h-6">
-            </div>
-            <p class="text-sm font-bold">Gender Desk Helpline</p>
+            {% endfor %}
         </div>
-        <p class="text-sm italic">grrc@wmsu.edu.ph</p>
-    </footer>
-    <footer class="bg-violet-500 text-white relative z-10 mt-auto pb-10">
-        <div class="container mx-auto px-6 py-12 relative">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Contact Info -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
-                    <div class="flex flex-col space-y-2">
-                        <p class="flex items-center">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            grrc@wmsu.edu.ph
-                        </p>
-                        <p class="flex items-center">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                            </svg>
-                            (+63) 123-4567
-                        </p>
+    </section>
+
+    <!-- Featured Research -->
+    <section class="py-16 bg-gray-50 w-full">
+        <div class="w-full max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 animate-on-scroll">Featured Research</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for research in featured_research %}
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    {% if research.image %}
+                    <img src="{{ research.image.url }}" alt="{{ research.title }}" class="w-full h-48 object-cover">
+                    {% else %}
+                    <img src="/static/links/svgs/default-research.jpg" alt="Default research image" class="w-full h-48 object-cover">
+                    {% endif %}
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-3 py-1 bg-[#A51C30] text-white text-sm rounded-full">Featured</span>
+                            <span class="px-3 py-1 bg-violet-100 text-violet-800 text-sm rounded-full">{{ research.category|default:"General Topic" }}</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">{{ research.title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ research.summary|default:research.content|truncatewords:20 }}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500">{{ research.created_at|date:"F Y"|default:"Date not available" }}</span>
+                            <a href="{% url 'research_detail' research.id %}" class="text-[#A51C30] hover:text-[#8b1728] flex items-center gap-1">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="{% url 'about_us'%}" class="hover:text-violet-200 transition-colors">About Us</a></li>
-                        <li><a href="{% url 'activities'%}" class="hover:text-violet-200 transition-colors">Activities</a></li>
-                        <li><a href="{% url 'research'%}" class="hover:text-violet-200 transition-colors">Research</a></li>
-                    </ul>
+                {% empty %}
+                <div class="col-span-3 text-center py-8">
+                    <p class="text-gray-500">No featured research available at this time.</p>
                 </div>
-
-                <!-- Social Links -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="hover:text-violet-200 transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="hover:text-violet-200 transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- GRRC Logo -->
-                <div class="flex items-center justify-center md:justify-end">
-                    <img src="/static/links/grrc_img/GRRC Logo.png" alt="GRRC Logo" class="w-24 h-24">
-                </div>
-            </div>
-
-            <!-- Copyright -->
-            <div class="border-t border-violet-400 mt-8 pt-8 text-center">
-                <p>&copy; 2024 Gender Research and Resource Center. All rights reserved.</p>
+                {% endfor %}
             </div>
         </div>
-    </footer>
+    </section>
 
+    <!-- Latest Research -->
+    <section class="py-16 bg-white w-full">
+        <div class="w-full max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 animate-on-scroll">Latest Research</h2>
+
+            <!-- Category Filter Buttons -->
+            <section class="py-8 bg-white">
+                <div class="flex flex-wrap justify-center gap-4 animate-on-scroll" id="category-filters">
+                    <!-- "All" button -->
+                    {% if not selected_category %}
+                    <a href="{% url 'research' %}" data-url="{% url 'research' %}" class="category-link px-6 py-3 bg-[#A51C30] text-white rounded-lg hover:bg-[#A51C30] hover:text-white transition-all duration-300 shadow-lg">
+                        All
+                    </a>
+                    {% else %}
+                    <a href="{% url 'research' %}" data-url="{% url 'research' %}" class="category-link px-6 py-3 border-2 border-[#A51C30] text-[#A51C30] rounded-lg hover:bg-[#A51C30] hover:text-white transition-all duration-300 hover:shadow-lg">
+                        All
+                    </a>
+                    {% endif %}
+
+                    <!-- Category Buttons -->
+                    {% for cat in categories %}
+                        {% if selected_category == cat.id %}
+                            <a href="?category={{ cat.id }}" class="category-link px-6 py-3 bg-[#A51C30] text-white rounded-lg hover:bg-[#8b1728] transition-all duration-300 shadow-lg">
+                                {{ cat.name }}
+                            </a>
+                        {% else %}
+                            <a href="?category={{ cat.id }}" class="category-link px-6 py-3 border-2 border-[#A51C30] text-[#A51C30] rounded-lg hover:bg-[#A51C30] hover:text-white transition-all duration-300 hover:shadow-lg">
+                                {{ cat.name }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- AJAX content container -->
+            <div id="research-results">
+                {% include 'links/research_results.html' %}
+            </div>
+        </div>
+    </section>
+
+    <!-- AJAX Script -->
     <script>
-        // Mobile menu functionality
-        const menuBtn = document.getElementById('menu-btn');
-        const menu = document.getElementById('menu');
-
-        menuBtn.addEventListener('click', () => {
-            menu.classList.toggle('translate-x-full');
-        });
-
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+        document.addEventListener('DOMContentLoaded', function () {
+            const resultsContainer = document.getElementById('research-results');
+            const categoryFilters = document.getElementById('category-filters');
+            let isLoading = false;
+        
+            async function loadContent(url) {
+                if (isLoading) return;
+                isLoading = true;
+        
+                try {
+                    // Show loading state
+                    resultsContainer.innerHTML = `
+                        <div class="flex justify-center items-center py-20">
+                            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#A51C30]"></div>
+                        </div>
+                    `;
+        
+                    const response = await fetch(url, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    });
+        
+                    if (!response.ok) throw new Error('Network response was not ok');
+        
+                    const data = await response.json();
+                    resultsContainer.innerHTML = data.html;
+                    history.pushState({}, '', url);
+        
+                    // Update active category button
+                    updateActiveCategory(data.selected_category);
+        
+                } catch (error) {
+                    console.error('Error:', error);
+                    resultsContainer.innerHTML = `
+                        <div class="text-center py-10 text-red-600">
+                            Error loading content. Please try again.
+                        </div>
+                    `;
+                } finally {
+                    isLoading = false;
+                }
+            }
+        
+            function updateActiveCategory(categoryId) {
+                // Reset all buttons
+                document.querySelectorAll('.category-link').forEach(link => {
+                    link.classList.remove('bg-[#A51C30]', 'text-white', 'shadow-lg');
+                    link.classList.add('border-2', 'border-[#A51C30]', 'text-[#A51C30]');
+                });
+        
+                // Highlight active
+                if (categoryId) {
+                    const activeLink = document.querySelector(`.category-link[href="?category=${categoryId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('bg-[#A51C30]', 'text-white', 'shadow-lg');
+                        activeLink.classList.remove('border-2', 'border-[#A51C30]', 'text-[#A51C30]');
+                    }
+                } else {
+                    const allLink = document.querySelector(`.category-link[data-url="${window.location.pathname}"]`);
+                    if (allLink) {
+                        allLink.classList.add('bg-[#A51C30]', 'text-white', 'shadow-lg');
+                        allLink.classList.remove('border-2', 'border-[#A51C30]', 'text-[#A51C30]');
+                    }
+                }
+            }
+        
+            // Event delegation for category filters
+            categoryFilters.addEventListener('click', function (e) {
+                if (e.target.classList.contains('category-link')) {
+                    e.preventDefault();
+                    loadContent(e.target.getAttribute('href'));
                 }
             });
-        }, observerOptions);
-
-        // Observe all elements with animate-on-scroll class
-        document.querySelectorAll('.animate-on-scroll').forEach((element) => {
-            observer.observe(element);
+        
+            // Event delegation for pagination
+            resultsContainer.addEventListener('click', function (e) {
+                const paginationLink = e.target.closest('.pagination-link');
+                if (paginationLink) {
+                    e.preventDefault();
+                    loadContent(paginationLink.getAttribute('href'));
+                }
+            });
+        
+            // Handle browser back/forward
+            window.addEventListener('popstate', function () {
+                loadContent(window.location.href);
+            });
         });
     </script>
+</main>
+
+{% include 'links/includes/footer.html' %}
+
+<script>
+    // Mobile menu functionality
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+        menu.classList.toggle('translate-x-full');
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all elements with animate-on-scroll class
+    document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+        observer.observe(element);
+    });
+</script>
+{% endblock %}    
 </body>
 </html>

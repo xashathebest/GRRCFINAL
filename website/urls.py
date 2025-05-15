@@ -20,4 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.user_views.urls')),
+    # path('cards/', views.card_list, name='card_list'),
+    # path('admin/cards/', views.manage_cards, name='manage_cards'),
+    # path('admin/cards/create/', views.create_card, name='create_card'),
+    # path('admin/cards/<int:card_id>/edit/', views.edit_card, name='edit_card'),
+    # path('admin/cards/<int:card_id>/delete/', views.delete_card, name='delete_card'),
 ]

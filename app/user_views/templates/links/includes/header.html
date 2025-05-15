@@ -1,0 +1,163 @@
+{% load static %}
+<div class="mx-auto">
+    <div class="flex justify-between items-center w-full">
+        <!-- Logo Section -->
+        <div class="flex items-center space-x-4">
+            <img src="/static/links/grrc_img/wmsu.png" alt="WMSU Logo" class="w-12 h-12">
+            <img src="/static/links/grrc_img/GRRC Logo.png" alt="GRRC Logo" class="w-12 h-12">
+        </div>
+
+        <!-- Desktop Navigation - Centered -->
+        <div class="hidden lg:flex items-center justify-center gap-4 xl:gap-8 flex-1">
+            <a href="{% url 'index' %}" class="text-[var(--nav-text-color)] text-sm font-medium hover:text-[var(--primary-color)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50 rounded-lg p-2">Home</a>
+            <a href="{% url 'activities' %}" class="text-[var(--nav-text-color)] text-sm font-medium hover:text-[var(--primary-color)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50 rounded-lg p-2">Activities</a>
+            <a href="{% url 'about_us' %}" class="text-[var(--nav-text-color)] text-sm font-medium hover:text-[var(--primary-color)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50 rounded-lg p-2">About Us</a>
+            <a href="{% url 'uga' %}" class="text-[var(--nav-text-color)] text-sm font-medium hover:text-[var(--primary-color)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50 rounded-lg p-2">UGA</a>
+            <a href="{% url 'research' %}" class="text-[var(--nav-text-color)] text-sm font-medium hover:text-[var(--primary-color)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50 rounded-lg p-2">Research</a>
+            <!-- Gender Clubs Dropdown -->
+            <div class="relative group" x-data="{ open: false }">
+                <button
+                    @mouseenter="open = true"
+                    @mouseleave="open = false"
+                    @focus="open = true"
+                    @blur="setTimeout(() => open = false, 100)"
+                    class="text-[var(--nav-text-color)] text-sm font-medium hover:text-[var(--primary-color)] transition-colors duration-200 flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50 rounded-lg p-2"
+                >
+                    Gender Clubs
+                    <svg
+                        class="w-4 h-4 transition-transform"
+                        :class="{ 'rotate-180': open }"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"
+                        />
+                    </svg>
+                </button>
+                <div
+                    x-show="open"
+                    @mouseenter="open = true"
+                    @mouseleave="open = false"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 transform scale-95 -translate-y-2"
+                    x-transition:enter-end="opacity-100 transform scale-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 transform scale-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 transform scale-95 -translate-y-2"
+                    class="absolute left-1/2 -translate-x-1/2 w-72 bg-[var(--nav-background)] rounded-lg shadow-lg py-2 mt-2 border border-[var(--primary-color)] z-50"
+                    style="display: none;"
+                >
+                    <div class="max-h-[60vh] overflow-y-auto thin-scrollbar">
+                        <a
+                            href="https://www.facebook.com/search/top?q=ccs-gender%20club"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-all duration-200 hover:pl-6 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50"
+                            >College of Computing Studies</a
+                        >
+                        <a
+                            href="https://www.facebook.com/profile.php?id=100093717316260"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Engineering</a
+                        >
+                        <a
+                            href="https://www.facebook.com/profile.php?id=100087148836205"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Nursing</a
+                        >
+                        <a
+                            href="https://www.facebook.com/CTEGenderClub"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Teacher Education</a
+                        >
+                        <a
+                            href="https://www.facebook.com/WMSUCLAGenderClub"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Liberal Arts</a
+                        >
+                        <a
+                            href="https://www.facebook.com/WMSUCSMGenderClub"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Science and Mathematics</a
+                        >
+                        <a
+                            href="https://www.facebook.com/profile.php?id=100094464625499"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Sport Science and Physical Education</a
+                        >
+                        <a
+                            href="https://www.facebook.com/WMSUCCJEGENDERSCLUB"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Criminal Justice Education</a
+                        >
+                        <a
+                            href="https://www.facebook.com/profile.php?id=61553350412685"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Public Administration</a
+                        >
+                        <a
+                            href="https://www.facebook.com/wmsucarchgenderclub"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Public Architecture</a
+                        >
+                        <a
+                            href="https://www.facebook.com/profile.php?id=100080166283438"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Home Economics</a
+                        >
+                        <a
+                            href="https://www.facebook.com/profile.php?id=61560413797983"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Asian and Islamic Studies</a
+                        >
+                        <a
+                            href="https://www.facebook.com/profile.php?id=100086428662391"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of Forestry and Environmental Studies</a
+                        >
+                        <a
+                            href="https://www.facebook.com/profile.php?id=100086894635444"
+                            target="_blank"
+                            class="block px-4 py-2 text-sm text-[var(--nav-text-color)] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
+                            >College of External Studies Diplahan</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Button -->
+        <div class="hidden lg:block">
+            <a href="{% url 'login' %}" class="bg-[var(--button-color)] hover:bg-[var(--button-hover-color)] text-white px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50">
+                Login
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button 
+            id="menu-btn" 
+            class="lg:hidden text-[var(--nav-text-color)] p-2 rounded-lg hover:bg-[var(--primary-color)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-opacity-50"
+            aria-label="Toggle mobile menu"
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+</div>

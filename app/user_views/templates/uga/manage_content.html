@@ -1,0 +1,89 @@
+ {% extends "links/base.html" %}
+{% block title %} Manage Content {% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="p-6 space-y-8">
+  <h1 class="text-2xl font-bold mb-4">Manage Landing Page Content</h1>
+
+  <!-- Hero Section -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Hero Section</h2>
+    <form method="POST" action="{% url 'update_hero' %}" enctype="multipart/form-data" class="space-y-4">
+      {% csrf_token %}
+      <input type="text" name="heading" value="{{ hero.heading }}" class="w-full border rounded p-2" required>
+      <textarea name="description" class="w-full border rounded p-2" required>{{ hero.description }}</textarea>
+      {% if hero.image %}
+        <img src="{{ hero.image.url }}" class="h-32" alt="Current Image">
+      {% endif %}
+      <input type="file" name="image" class="w-full border p-2 rounded">
+      <button class="px-4 py-2 bg-blue-500 text-white rounded">Update Hero</button>
+    </form>
+  </div>  
+
+  <!-- Overview Section -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Overview Section</h2>
+    <form method="POST" action="{% url 'update_overview' %}" class="space-y-4">
+      {% csrf_token %}
+      <input type="text" name="heading" value="{{ overview.heading }}" class="w-full border rounded p-2" required>
+      <textarea name="description" class="w-full border rounded p-2" required>{{ overview.description }}</textarea>
+      <button class="px-4 py-2 bg-blue-500 text-white rounded">Update Overview</button>
+    </form>
+  </div>
+
+  <!-- Key Areas Section -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Key Areas</h2>
+    {% for key_area in key_areas %}
+    <form method="POST" action="{% url 'update_key_area' key_area.id %}" class="space-y-2 mb-4">
+      {% csrf_token %}
+      <input type="text" name="title" value="{{ key_area.title }}" class="w-full border rounded p-2" required>
+      <textarea name="description" class="w-full border rounded p-2" required>{{ key_area.description }}</textarea>
+      <button class="px-4 py-2 bg-green-600 text-white rounded">Update Key Area</button>
+    </form>
+    {% endfor %}
+  </div>
+
+  <!-- Content Cards Section -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Content Cards</h2>
+    {% for card in content_cards %}
+    <form method="POST" action="{% url 'update_card'  %}" enctype="multipart/form-data" class="space-y-2 mb-4">
+      {% csrf_token %}  
+      <input type="text" name="title" value="{{ card.title }}" class="w-full border rounded p-2" required>
+      <textarea name="description" class="w-full border rounded p-2">{{ card.description }}</textarea>
+      {% if card.image %}
+        <img src="{{ card.image.url }}" class="h-32" alt="Card Image">
+      {% endif %}
+      <input type="file" name="image" class="w-full border p-2 rounded">
+      <button class="px-4 py-2 bg-indigo-600 text-white rounded">Update Card</button>
+    </form>
+    {% endfor %}
+  </div>
+
+  <!-- Implementation Strategy Section -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Implementation Strategy</h2>
+    <form method="POST" action="{% url 'update_strategy' %}" class="space-y-4">
+      {% csrf_token %}
+      <input type="text" name="heading" value="{{ strategy.heading }}" class="w-full border rounded p-2" required>
+      <textarea name="description" class="w-full border rounded p-2" required>{{ strategy.description }}</textarea>
+      <button class="px-4 py-2 bg-purple-600 text-white rounded">Update Strategy</button>
+    </form>
+  </div>
+
+  <!-- Call to Action Section -->
+  <div class="bg-white p-4 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Call to Action</h2>
+    <form method="POST" action="{% url 'update_cta' %}" class="space-y-4">
+      {% csrf_token %}
+      <input type="text" name="heading" value="{{ cta.heading }}" class="w-full border rounded p-2" required>
+      <input type="text" name="button_text" value="{{ cta.button_text }}" class="w-full border rounded p-2">
+      <input type="url" name="button_link" value="{{ cta.button_link }}" class="w-full border rounded p-2">
+      <button class="px-4 py-2 bg-red-600 text-white rounded">Update Call to Action</button>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

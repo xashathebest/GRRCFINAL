@@ -1,0 +1,107 @@
+{% extends 'links/base.html' %}
+{% block title %} Edit Mission Vision {% endblock %}
+
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">Edit Mission and Vision</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'update_mission_vision' %}" class="space-y-6">
+        {% csrf_token %}
+
+        <div>
+            <label class="block mb-2 font-semibold" for="mission_title">Block Title</label>
+            <input 
+                type="text" 
+                id="mission_title" 
+                name="mission_title" 
+                value="{{ mission_vision.mission_title }}" 
+                class="w-full border border-gray-300 p-2 rounded"
+                required
+            >
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold" for="mission_description">Description</label>
+            <textarea 
+                id="mission_description" 
+                name="mission_description" 
+                rows="5" 
+                class="w-full border border-gray-300 p-2 rounded"
+                required
+            >{{ mission_vision.mission_description }}</textarea>
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold" for="mission_points">Bullet Points (separate by commas)</label>
+            <textarea 
+                id="mission_points" 
+                name="mission_points" 
+                rows="3" 
+                class="w-full border border-gray-300 p-2 rounded"
+            >{{ mission_vision.mission_points }}</textarea>
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold" for="vision_title">Block Title</label>
+            <input 
+                type="text" 
+                id="vision_title" 
+                name="vision_title" 
+                value="{{ mission_vision.vision_title }}" 
+                class="w-full border border-gray-300 p-2 rounded"
+                required
+            >
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold" for="vision_description">Description</label>
+            <textarea 
+                id="vision_description" 
+                name="vision_description" 
+                rows="5" 
+                class="w-full border border-gray-300 p-2 rounded"
+                required
+            >{{ mission_vision.vision_description }}</textarea>
+        </div>
+
+        <div>
+            <label class="block mb-2 font-semibold" for="vision_points">Bullet Points (separate by commas)</label>
+            <textarea 
+                id="vision_points" 
+                name="vision_points" 
+                rows="3" 
+                class="w-full border border-gray-300 p-2 rounded"
+            >{{ mission_vision.vision_points }}</textarea>
+        </div>
+        
+
+        <div>
+            <label class="block mb-2 font-semibold" for="background_image">Background Image</label>
+            <p class="text-sm text-gray-600 mb-2">Upload a high-resolution image that will work responsively across all devices.</p>
+            {% if mission_vision.background_image %}
+                <img src="{{ mission_vision.background_image.url }}" alt="Current Background" class="h-32 mb-2 object-cover">
+            {% endif %}
+            <input 
+                type="file" 
+                id="background_image" 
+                name="background_image" 
+                accept="image/*" 
+                class="w-full border border-gray-300 p-2 rounded"
+            >
+        </div>
+
+        <button type="submit" class="px-6 py-2 bg-[#A463E6] text-white rounded hover:bg-[#9F59E6] transition">
+            Save Changes
+        </button>
+    </form>
+</div>
+{% endblock %}
