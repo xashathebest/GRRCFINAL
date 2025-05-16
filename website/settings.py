@@ -93,7 +93,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ShaWmgxe4$finalgrrc_db',   # your PythonAnywhere DB name
-        'USER': 'ShaWmgxe4',                 # your PythonAnywhere username
+        'USER': 'ShaWmgxe4$default',                 # your PythonAnywhere username
         'PASSWORD': '$upremo4Life!2024#',   # your MySQL password
         'HOST': 'ShaWmgxe4.mysql.pythonanywhere-services.com',
         'PORT': '3306',
