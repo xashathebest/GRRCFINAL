@@ -86,13 +86,16 @@ WSGI_APPLICATION = 'website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'finalgrrc_db',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'ShaWmgxe4$finalgrrc_db',   # your PythonAnywhere DB name
+        'USER': 'ShaWmgxe4',                 # your PythonAnywhere username
+        'PASSWORD': '$upremo4Life!2024#',   # your MySQL password
+        'HOST': 'ShaWmgxe4.mysql.pythonanywhere-services.com',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
@@ -100,6 +103,8 @@ DATABASES = {
         }
     }
 }
+
+
 
 
 # Password validation
