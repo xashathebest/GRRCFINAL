@@ -1,9 +1,8 @@
-from django.urls import path # type: ignore
+from django.urls import path
 from . import views
-from django.conf import settings # type: ignore
-from django.conf.urls.static import static # type: ignore
+from django.conf import settings
+from django.conf.urls.static import static
 
- 
 urlpatterns = [
     path('', views.index, name='index'),
     path('admins/', views.home, name='home'),
@@ -66,7 +65,7 @@ urlpatterns = [
     path('add-carousel-image/', views.add_carousel_image, name='add_carousel_image'),
     path('update-carousel-image/<int:image_id>/', views.update_carousel_image, name='update_carousel_image'),
     path('delete-carousel-image/<int:image_id>/', views.delete_carousel_image, name='delete_carousel_image'),
-    
+
     # Activities Carousel Management
     path('manage-activities-carousel/', views.manage_activities_carousel, name='manage_activities_carousel'),
     path('add-activities-carousel-image/', views.add_activities_carousel_image, name='add_activities_carousel_image'),
@@ -91,4 +90,3 @@ urlpatterns = [
     path('update-research-carousel-image/<int:image_id>/', views.update_research_carousel_image, name='update_research_carousel_image'),
     path('delete-research-carousel-image/<int:image_id>/', views.delete_research_carousel_image, name='delete_research_carousel_image'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
