@@ -4,8 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include('app.urls')),  # Connect main app's URLs to root
-    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
     path('admins/', views.home, name='home'),
     path('accounts/', views.account_list, name='account_list'),
     path('article_list/', views.article_list, name='article_list'),
